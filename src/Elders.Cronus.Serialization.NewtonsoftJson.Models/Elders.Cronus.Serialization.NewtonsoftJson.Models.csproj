@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{18724F0F-FE76-4A5D-8A87-C1FC323B3179}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Elders.Cronus.Serialization.NewtonsoftJson.Models</RootNamespace>
+    <AssemblyName>Elders.Cronus.Serialization.NewtonsoftJson.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DomainModeling\AggregateRoot.cs" />
+    <Compile Include="DomainModeling\AggregateRootApplicationService.cs" />
+    <Compile Include="DomainModeling\AggregateRootException.cs" />
+    <Compile Include="DomainModeling\AggregateRootId.cs" />
+    <Compile Include="DomainModeling\AggregateRootState.cs" />
+    <Compile Include="DomainModeling\BoundedContextAttribute.cs" />
+    <Compile Include="DomainModeling\ByteArrayHelper.cs" />
+    <Compile Include="DomainModeling\DomainObjectEventHandlerMapping.cs" />
+    <Compile Include="DomainModeling\Entity.cs" />
+    <Compile Include="DomainModeling\EntityGuidId.cs" />
+    <Compile Include="DomainModeling\EntityId.cs" />
+    <Compile Include="DomainModeling\EntityState.cs" />
+    <Compile Include="DomainModeling\GuidId.cs" />
+    <Compile Include="DomainModeling\HashCodeModifier.cs" />
+    <Compile Include="DomainModeling\IAggregateRepository.cs" />
+    <Compile Include="DomainModeling\IAggregateRoot.cs" />
+    <Compile Include="DomainModeling\IAggregateRootId.cs" />
+    <Compile Include="DomainModeling\IAggregateRootState.cs" />
+    <Compile Include="DomainModeling\IBlobId.cs" />
+    <Compile Include="DomainModeling\ICanRestoreStateFromEvents.cs" />
+    <Compile Include="DomainModeling\ICommand.cs" />
+    <Compile Include="DomainModeling\ICommandHandler.cs" />
+    <Compile Include="DomainModeling\IEntityId.cs" />
+    <Compile Include="DomainModeling\IEntityState.cs" />
+    <Compile Include="DomainModeling\IEvent.cs" />
+    <Compile Include="DomainModeling\IEventHandler.cs" />
+    <Compile Include="DomainModeling\IMessage.cs" />
+    <Compile Include="DomainModeling\IPort.cs" />
+    <Compile Include="DomainModeling\IProjection.cs" />
+    <Compile Include="DomainModeling\IPublisher.cs" />
+    <Compile Include="DomainModeling\IValueObject.cs" />
+    <Compile Include="DomainModeling\Message.cs" />
+    <Compile Include="DomainModeling\MessageInfo.cs" />
+    <Compile Include="DomainModeling\StringId.cs" />
+    <Compile Include="NestedTypeWithNonDataContractTypes.cs" />
+    <Compile Include="NestedTypeWithBaseClassInheritance.cs" />
+    <Compile Include="NestedTypeWithDctionaryInheritance.cs" />
+    <Compile Include="NestedTypeWithUndefinedInterfaceInheritance.cs" />
+    <Compile Include="NestedTypeWithUndefinedObjectInheritance.cs" />
+    <Compile Include="NestedTypeWithHeaders.cs" />
+    <Compile Include="SimpleTypeWithHeaders.cs" />
+    <Compile Include="ExtenralReferencedType.cs" />
+    <Compile Include="NestedType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleType.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
