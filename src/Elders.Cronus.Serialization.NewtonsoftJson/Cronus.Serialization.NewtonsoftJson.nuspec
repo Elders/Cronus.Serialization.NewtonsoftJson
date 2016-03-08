@@ -11,6 +11,7 @@
     <licenseUrl>https://github.com/Elders/Cronus/blob/master/LICENSE</licenseUrl>
     <projectUrl>http://Elders.github.io/Cronus</projectUrl>
     <releaseNotes>@releaseNotes@</releaseNotes>
+    <tags>CQRS DDD ES Event store sourcing</tags>
     @dependencies@
   </metadata>
 </package>
