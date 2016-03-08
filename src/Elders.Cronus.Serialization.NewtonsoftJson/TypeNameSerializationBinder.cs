@@ -54,8 +54,8 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
             }
             catch (TypeLoadException ex)
             {
-                string error = String.Format("Cannot resolve type {0}:'{1}'. Probably the type was renamed or an object was serialized without DataContractAttribute on first place. In order to not break the rest of the results this record will not be deserialized and default value will be returned.", assemblyName, typeName);
-                throw new InvalidOperationException(error);
+
+                throw new InvalidOperationException(String.Format("Unkown, unregistered type {0}:'{1}'", assemblyName, typeName));
             }
         }
     }
