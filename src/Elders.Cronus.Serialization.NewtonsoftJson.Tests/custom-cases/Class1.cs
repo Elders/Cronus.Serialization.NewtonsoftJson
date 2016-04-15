@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using Elders.Cronus.DomainModeling;
 using Machine.Specifications;
 
@@ -82,7 +78,6 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
     [Subject(typeof(JsonSerializer))]
     public class Whem_UserConversations
     {
-
         Establish context = () =>
         {
             ser = new UserConversations(new UserId(Guid.NewGuid())) { UpdatedAt = DateTime.UtcNow };
@@ -97,8 +92,6 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
 
         It should_not_be_null = () => deser.ShouldNotBeNull();
 
-
-        static Exception ex;
         static UserConversations ser;
         static UserConversations deser;
         static Stream serStream;

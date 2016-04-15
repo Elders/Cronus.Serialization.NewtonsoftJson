@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using Machine.Specifications;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
@@ -15,9 +11,9 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
         SerializableException() { }
 
         //FIGURE THIS OUT
-        //public SerializableException(SerializationInfo info, StreamingContext ctx)
-        //{
-        //}
+        protected SerializableException(SerializationInfo info, StreamingContext ctx)
+        {
+        }
 
         public SerializableException(Exception ex)
         {
@@ -78,12 +74,11 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
             serializer.Serialize(serStream, ser);
             serStream.Position = 0;
         };
+
         Because of_deserialization = () => { deser = (SerializableException)serializer.Deserialize(serStream); };
 
         It should_not_be_null = () => deser.ShouldNotBeNull();
 
-
-        static Exception ex;
         static SerializableException ser;
         static SerializableException deser;
         static Stream serStream;

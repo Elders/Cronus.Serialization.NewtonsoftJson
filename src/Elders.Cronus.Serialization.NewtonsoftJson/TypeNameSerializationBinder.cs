@@ -1,8 +1,5 @@
 ﻿using System.Reflection;
-using Elders.Cronus.Serializer;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using NewtonsoftJson = Newtonsoft.Json.Serialization;
 using System;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson
@@ -52,9 +49,8 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
                 }
                 return Type.GetType(string.Format("{0}, {1}", typeName, assemblyName), true);
             }
-            catch (TypeLoadException ex)
+            catch (TypeLoadException)
             {
-
                 throw new InvalidOperationException(String.Format("Unkown, unregistered type {0}:'{1}'", assemblyName, typeName));
             }
         }

@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using Elders.Cronus.DomainModeling;
 using Elders.Protoreg;
 using ProtoBuf.Meta;
 using Elders.Cronus.Serialization.NewtonsoftJson;
