@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using Machine.Specifications;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
@@ -12,7 +8,6 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
     [Subject(typeof(JsonSerializer))]
     public class Whem_stackoverflow
     {
-
         Establish context = () =>
         {
             ser = new C() { CString = "C", Aprop = new A() { AString = "A" } };
@@ -28,7 +23,6 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
         It should_not_be_null = () => deser.ShouldNotBeNull();
 
 
-        static Exception ex;
         static C ser;
         static C deser;
         static Stream serStream;
