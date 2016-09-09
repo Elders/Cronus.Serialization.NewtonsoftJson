@@ -9,9 +9,9 @@
     <summary>@summary@</summary>
     <iconUrl>https://raw.githubusercontent.com/Elders/Cronus/master/Cronus.png</iconUrl>
     <licenseUrl>https://github.com/Elders/Cronus/blob/master/LICENSE</licenseUrl>
-    <projectUrl>http://Elders.github.io/Cronus</projectUrl>
+    <projectUrl>https://github.com/Elders/Cronus</projectUrl>
     <releaseNotes>@releaseNotes@</releaseNotes>
-    <tags>CQRS DDD ES Event store sourcing</tags>
+    <tags>cronus serializer</tags>
     @dependencies@
   </metadata>
 </package>

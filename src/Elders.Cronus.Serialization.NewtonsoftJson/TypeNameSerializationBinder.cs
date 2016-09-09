@@ -1,12 +1,13 @@
 ﻿using System.Reflection;
 using System.Runtime.Serialization;
 using System;
+using Elders.Cronus.Serialization.NewtonsoftJson.Logging;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson
 {
     public class TypeNameSerializationBinder : SerializationBinder
     {
-        static log4net.ILog log = log4net.LogManager.GetLogger(typeof(TypeNameSerializationBinder));
+        static ILog log = LogProvider.GetLogger(typeof(TypeNameSerializationBinder));
 
         static Assembly NetAssembly = typeof(object).Assembly;
 
