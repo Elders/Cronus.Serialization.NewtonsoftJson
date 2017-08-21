@@ -1,3 +1,6 @@
+#### 2.0.0-beta0001 - 18.08.2017
+* This release uses the official netstandard 2.0
+
 #### 1.0.1 - 09.09.2016
 * Fixes type problem. This has performance hit. Sorry.
 

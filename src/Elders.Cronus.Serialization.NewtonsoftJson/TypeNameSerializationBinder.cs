@@ -2,10 +2,11 @@
 using System.Runtime.Serialization;
 using System;
 using Elders.Cronus.Serialization.NewtonsoftJson.Logging;
+using Newtonsoft.Json.Serialization;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson
 {
-    public class TypeNameSerializationBinder : SerializationBinder
+    public class TypeNameSerializationBinder : ISerializationBinder
     {
         static ILog log = LogProvider.GetLogger(typeof(TypeNameSerializationBinder));
 
@@ -18,7 +19,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
             this.contractRepository = new ContractsRepository(contractAssemblyes);
         }
 
-        public override void BindToName(Type serializedType, out string assemblyName, out string typeName)
+        public void BindToName(Type serializedType, out string assemblyName, out string typeName)
         {
             string name;
             if (contractRepository.TryGet(serializedType, out name))
@@ -38,7 +39,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
             }
         }
 
-        public override Type BindToType(string assemblyName, string typeName)
+        public Type BindToType(string assemblyName, string typeName)
         {
             try
             {

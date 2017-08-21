@@ -1,98 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C7B52D62-E020-4810-9748-84C2A0E433C7}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>Elders.Cronus.Serialization.NewtonsoftJson.Tests</RootNamespace>
-    <AssemblyName>Elders.Cronus.Serialization.NewtonsoftJson.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <StartupObject />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Machine.Specifications, Version=0.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Machine.Specifications.0.11.0\lib\net45\Machine.Specifications.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Machine.Specifications.Should, Version=0.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Machine.Specifications.Should.0.11.0\lib\net45\Machine.Specifications.Should.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Remoting" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Serialization" />
+    <PackageReference Include="Machine.Specifications" Version="0.11.0" />
+    <PackageReference Include="Machine.Specifications.Runner.VisualStudio" Version="2.2.3" />
+    <PackageReference Include="Machine.Specifications.Should" Version="0.11.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="custom-cases\Class1.cs" />
-    <Compile Include="custom-cases\SerializableException.cs" />
-    <Compile Include="DomainModeling\Class1.cs" />
-    <Compile Include="Omg.cs" />
-    <Compile Include="protobuf-net\Whem_serializing_nested_type.cs" />
-    <Compile Include="protobuf-net\Whem_serializing_simple_type.cs" />
-    <Compile Include="proxy\When_serializng_simple_type_with_headers.cs" />
-    <Compile Include="runtime-type-discovery\Whem_serializing_nested_type_with_headers.cs" />
-    <Compile Include="runtime-type-discovery\When_serializng_simple_type_with_headers.cs" />
-    <Compile Include="runtime-type-inheritence-model\Whem_serializing_nested_type_with_dictionary.cs" />
-    <Compile Include="runtime-type-inheritence-model\Whem_serializing_nested_type_undefinded_baseclass_inheritance.cs" />
-    <Compile Include="runtime-type-inheritence-model\Whem_serializing_nested_type_undefinded_object_inheritance.cs" />
-    <Compile Include="runtime-type-inheritence-model\Whem_serializing_nested_type_undefinded_interface_inheritance.cs" />
+    <ProjectReference Include="..\Elders.Cronus.Serialization.NewtonsoftJson.Models\Elders.Cronus.Serialization.NewtonsoftJson.Models.csproj" />
+    <ProjectReference Include="..\Elders.Cronus.Serialization.NewtonsoftJson\Elders.Cronus.Serialization.NewtonsoftJson.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Elders.Cronus.Serialization.NewtonsoftJson.Models\Elders.Cronus.Serialization.NewtonsoftJson.Models.csproj">
-      <Project>{18724f0f-fe76-4a5d-8a87-c1fc323b3179}</Project>
-      <Name>Elders.Cronus.Serialization.NewtonsoftJson.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Elders.Cronus.Serialization.NewtonsoftJson\Elders.Cronus.Serialization.NewtonsoftJson.csproj">
-      <Project>{f6e4d746-001f-41fe-a568-597f0f3a059c}</Project>
-      <Name>Elders.Cronus.Serialization.NewtonsoftJson</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
