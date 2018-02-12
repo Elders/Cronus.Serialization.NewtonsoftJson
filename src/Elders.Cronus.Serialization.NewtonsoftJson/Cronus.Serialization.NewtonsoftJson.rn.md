@@ -1,7 +1,4 @@
-#### 2.0.0-beta0002 - 08.01.2018
-* Code cleanup
-
-#### 2.0.0-beta0001 - 18.08.2017
+#### 2.0.0 - 12.02.2018
 * This release uses the official netstandard 2.0
 
 #### 1.0.1 - 09.09.2016

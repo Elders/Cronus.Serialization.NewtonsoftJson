@@ -6,14 +6,14 @@ using Machine.Specifications;
 namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
 {
     [Subject(typeof(JsonSerializer))]
-    public class Whem_stackoverflow
+    public class When_stackoverflow
     {
         Establish context = () =>
         {
             ser = new C() { CString = "C", Aprop = new A() { AString = "A" } };
 
-            serializer = new JsonSerializer(typeof(NestedType).Assembly, typeof(Whem_stackoverflow).Assembly);
-            serializer2 = new JsonSerializer(typeof(NestedType).Assembly, typeof(Whem_stackoverflow).Assembly);
+            serializer = new JsonSerializer(typeof(NestedType).Assembly, typeof(When_stackoverflow).Assembly);
+            serializer2 = new JsonSerializer(typeof(NestedType).Assembly, typeof(When_stackoverflow).Assembly);
             serStream = new MemoryStream();
             serializer.Serialize(serStream, ser);
             serStream.Position = 0;
