@@ -13,7 +13,7 @@ namespace Elders.Cronus.Pipeline.Config
         {
             var builder = self as ISettingsBuilder;
             var contracts = new List<Assembly>(assembliesContainingContracts);
-            contracts.AddRange(new Assembly[] { typeof(CronusAssembly).Assembly, typeof(DomainModeling.IMessage).Assembly });
+            contracts.AddRange(new Assembly[] { typeof(CronusAssembly).Assembly, typeof(IMessage).Assembly });
             var serializer = new JsonSerializer(contracts.ToArray());
             builder.Container.RegisterSingleton<ISerializer>(() => serializer);
             return self;

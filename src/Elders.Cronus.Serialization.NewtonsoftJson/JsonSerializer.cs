@@ -21,10 +21,10 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
             settings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
             settings.ContractResolver = new DataMemberContractResolver();
             settings.TypeNameHandling = TypeNameHandling.Objects;
-            settings.TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple;
+            settings.TypeNameAssemblyFormatHandling = Newtonsoft.Json.TypeNameAssemblyFormatHandling.Simple;
             settings.Formatting = Formatting.Indented;
             settings.MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead;
-            settings.Binder = new TypeNameSerializationBinder(assembliesContainingContracts);
+            settings.SerializationBinder = new TypeNameSerializationBinder(assembliesContainingContracts);
             settings.ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor;
             serializer = Newtonsoft.Json.JsonSerializer.Create(settings);
         }
@@ -38,7 +38,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
 
         public void Serialize<T>(System.IO.Stream str, T message)
         {
-            //DO NOT DISPOSE THE STREAM WRITER!!! DISPOSING IT CLOSES THE EXTERNAL STREAM
+            // DO NOT DISPOSE THE STREAM WRITER!!! DISPOSING IT CLOSES THE EXTERNAL STREAM
             var streamWriter = new StreamWriter(str);
             serializer.Serialize(streamWriter, message);
             streamWriter.Flush();
