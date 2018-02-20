@@ -1,3 +1,6 @@
+#### 2.0.2 - 20.02.2018
+* Downgrades Newtonsoft.Json to 10.0.3
+
 #### 2.0.1 - 20.02.2018
 * Targets netstandard 2.0 and .NET 4.5
 
