@@ -1,3 +1,6 @@
+#### 2.0.1 - 20.02.2018
+* Targets netstandard 2.0 and .NET 4.5
+
 #### 2.0.0 - 12.02.2018
 * This release uses the official netstandard 2.0
 
