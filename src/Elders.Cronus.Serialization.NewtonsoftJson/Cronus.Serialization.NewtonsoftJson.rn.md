@@ -1,3 +1,6 @@
+#### 2.0.3 - 26.02.2018
+* Updates Cronus
+
 #### 2.0.2 - 20.02.2018
 * Downgrades Newtonsoft.Json to 10.0.3
 
