@@ -1,3 +1,6 @@
+#### 2.0.4 - 28.02.2018
+* Updates Cronus
+
 #### 2.0.3 - 26.02.2018
 * Updates Cronus
 
