@@ -1,8 +1,8 @@
-﻿using System.Reflection;
-using Elders.Cronus.Serializer;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using Elders.Cronus.IocContainer;
 using Elders.Cronus.Serialization.NewtonsoftJson;
-using System.Collections.Generic;
+using Elders.Cronus.Serializer;
 
 namespace Elders.Cronus.Pipeline.Config
 {

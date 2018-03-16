@@ -1,6 +1,5 @@
-﻿using System.Reflection;
-using System.Runtime.Serialization;
-using System;
+﻿using System;
+using System.Reflection;
 using Elders.Cronus.Serialization.NewtonsoftJson.Logging;
 using Newtonsoft.Json.Serialization;
 
