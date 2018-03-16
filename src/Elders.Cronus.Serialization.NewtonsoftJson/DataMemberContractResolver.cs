@@ -1,11 +1,11 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Collections;
 
 namespace Elders.Cronus.Serialization.Newtonsofst.Jsson
 {
@@ -33,8 +33,7 @@ namespace Elders.Cronus.Serialization.Newtonsofst.Jsson
         protected override JsonContract CreateContract(Type objectType)
         {
             if (objectType.GetInterfaces().Any(i => i == typeof(IDictionary) ||
-                (i.IsGenericType &&
-                 i.GetGenericTypeDefinition() == typeof(IDictionary<,>))))
+                (i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDictionary<,>))))
             {
                 return base.CreateArrayContract(objectType);
             }

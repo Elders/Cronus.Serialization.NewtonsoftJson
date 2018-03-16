@@ -1,3 +1,6 @@
+#### 2.1.0 - 16.03.2018
+* Discovery for contracts based on `[DataContractAttribute]`
+
 #### 2.0.4 - 28.02.2018
 * Updates Cronus
 

@@ -13,9 +13,9 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
 
         private readonly ContractsRepository contractRepository;
 
-        public TypeNameSerializationBinder(Assembly[] contractAssemblyes)
+        public TypeNameSerializationBinder(Assembly[] contractAssemblies)
         {
-            this.contractRepository = new ContractsRepository(contractAssemblyes);
+            this.contractRepository = new ContractsRepository(contractAssemblies);
         }
 
         public void BindToName(Type serializedType, out string assemblyName, out string typeName)

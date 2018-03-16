@@ -1,11 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
+using Elders.Cronus.Discoveries;
 using Elders.Cronus.IocContainer;
 using Elders.Cronus.Serialization.NewtonsoftJson;
 using Elders.Cronus.Serializer;
 
 namespace Elders.Cronus.Pipeline.Config
 {
+    public class DefaultContractsAssembliesDiscovery : AutoDiscoveryByReflection
+    {
+        protected override void DiscoverFromAssemblies(ISettingsBuilder builder, List<Assembly> loadedAssemblies)
+        {
+            Assembly[] assembliesWithContracts = loadedAssemblies
+                .Where(ass => ass.GetExportedTypes().Any(type => type.HasAttribute<DataContractAttribute>()))
+                .ToArray();
+
+            var serializer = new JsonSerializer(assembliesWithContracts);
+            builder.Container.RegisterSingleton<ISerializer>(() => serializer);
+        }
+    }
+
+
     public static class PublisherSettingsExtensions
     {
         public static T UseContractsFromAssemblies<T>(this T self, Assembly[] assembliesContainingContracts = null)
