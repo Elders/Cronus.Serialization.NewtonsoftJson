@@ -10,7 +10,7 @@ using Elders.Cronus.Serializer;
 
 namespace Elders.Cronus.Pipeline.Config
 {
-    public class DefaultContractsAssembliesDiscovery : AutoDiscoveryBasedOnReferencedAssemblies
+    public class DefaultContractsAssembliesDiscovery : DiscoveryBasedOnExecutingDirAssemblies
     {
         protected override void DiscoverFromAssemblies(ISettingsBuilder builder, IEnumerable<Assembly> assemblies)
         {
@@ -21,13 +21,7 @@ namespace Elders.Cronus.Pipeline.Config
             var serializer = new JsonSerializer(assembliesWithContracts);
             builder.Container.RegisterSingleton<ISerializer>(() => serializer);
         }
-
-        protected override IEnumerable<Type> GetInterestedTypes()
-        {
-            yield return typeof(DataContractAttribute);
-        }
     }
-
 
     public static class PublisherSettingsExtensions
     {
