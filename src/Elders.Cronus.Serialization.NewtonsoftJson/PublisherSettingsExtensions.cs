@@ -10,16 +10,21 @@ using Elders.Cronus.Serializer;
 
 namespace Elders.Cronus.Pipeline.Config
 {
-    public class DefaultContractsAssembliesDiscovery : AutoDiscoveryByReflection
+    public class DefaultContractsAssembliesDiscovery : AutoDiscoveryBasedOnReferencedAssemblies
     {
-        protected override void DiscoverFromAssemblies(ISettingsBuilder builder, List<Assembly> loadedAssemblies)
+        protected override void DiscoverFromAssemblies(ISettingsBuilder builder, IEnumerable<Assembly> assemblies)
         {
-            Assembly[] assembliesWithContracts = loadedAssemblies
+            Assembly[] assembliesWithContracts = assemblies
                 .Where(ass => ass.GetExportedTypes().Any(type => type.HasAttribute<DataContractAttribute>()))
                 .ToArray();
 
             var serializer = new JsonSerializer(assembliesWithContracts);
             builder.Container.RegisterSingleton<ISerializer>(() => serializer);
+        }
+
+        protected override IEnumerable<Type> GetInterestedTypes()
+        {
+            yield return typeof(DataContractAttribute);
         }
     }
 
