@@ -2,6 +2,8 @@
 using System.Runtime.Serialization;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
+using System;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
 {
@@ -10,7 +12,9 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
     {
         Establish context = () =>
         {
-            serializer = new JsonSerializer(new[] { typeof(TypeProblem_TopLevel).Assembly });
+            var contracts = new List<Type>();
+            contracts.AddRange(typeof(TypeProblem_TopLevel).Assembly.GetExportedTypes());
+            serializer = new JsonSerializer(contracts);
             json = @"
 {
 ""$type"": ""07504e95-e40e-40b5-b7f6-209f6023c13c"",
@@ -35,7 +39,6 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
         static string json;
         static JsonSerializer serializer;
         static TypeProblem_TopLevel result;
-        static string measure;
     }
 
     [DataContract(Name = "07504e95-e40e-40b5-b7f6-209f6023c13c")]

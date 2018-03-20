@@ -1,3 +1,6 @@
+#### 2.1.0-beta0004 - 20.03.2018
+* When registering contracts using assemblies is obsolete now. Use IEnumerable<Type>
+
 #### 2.1.0-beta0003 - 19.03.2018
 * Updates Cronus
 

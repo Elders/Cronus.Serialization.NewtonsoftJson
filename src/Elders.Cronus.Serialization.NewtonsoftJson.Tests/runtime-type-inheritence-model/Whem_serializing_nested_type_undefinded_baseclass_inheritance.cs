@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Machine.Specifications;
 
@@ -13,8 +14,10 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
             ser = new NestedTypeWithBaseClassInheritance() { Int = 5, Date = DateTime.UtcNow.AddDays(1), String = "a", Nested = new UndefinedBaseclassInheritance() { Int = 4, Date = DateTime.UtcNow.AddDays(2), String = "b" } };
             ser.Nested.CustomBaseClassString = "Custom string";
             ser.Nested.CustomBaseBaseClassString = "UHAAA";
-            serializer = new JsonSerializer((typeof(NestedType).Assembly));
-            serializer2 = new JsonSerializer((typeof(NestedType).Assembly));
+            var contracts = new List<Type>();
+            contracts.AddRange(typeof(NestedType).Assembly.GetExportedTypes());
+            serializer = new JsonSerializer(contracts);
+            serializer2 = new JsonSerializer(contracts);
             serStream = new MemoryStream();
             serializer.Serialize(serStream, ser);
             serStream.Position = 0;
