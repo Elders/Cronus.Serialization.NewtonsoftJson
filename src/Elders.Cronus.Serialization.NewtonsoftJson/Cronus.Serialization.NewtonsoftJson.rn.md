@@ -1,3 +1,7 @@
+#### 2.1.0-beta0006 - 21.03.2018
+* Discovery of contracts is now done only within assemblies which have BoundedContextAttribute
+* Updates Cronus
+
 #### 2.1.0-beta0005 - 20.03.2018
 * Updates Cronus
 
