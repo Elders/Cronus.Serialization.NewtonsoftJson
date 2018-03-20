@@ -14,7 +14,9 @@ namespace Elders.Cronus.Pipeline.Config
     {
         protected override void DiscoverFromAssemblies(ISettingsBuilder builder, IEnumerable<Assembly> assemblies)
         {
-            IEnumerable<Type> contracts = assemblies.SelectMany(ass => ass.GetExportedTypes());
+            IEnumerable<Type> contracts = assemblies
+                .Where(asm => ReferenceEquals(default(BoundedContextAttribute), asm.GetAssemblyAttribute<BoundedContextAttribute>()) == false)
+                .SelectMany(ass => ass.GetExportedTypes());
 
             var serializer = new JsonSerializer(contracts);
             builder.Container.RegisterSingleton<ISerializer>(() => serializer);
