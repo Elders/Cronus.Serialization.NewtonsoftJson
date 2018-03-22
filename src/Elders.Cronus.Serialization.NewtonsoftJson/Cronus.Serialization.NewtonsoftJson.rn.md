@@ -1,21 +1,7 @@
-#### 2.1.0-beta0006 - 21.03.2018
-* Discovery of contracts is now done only within assemblies which have BoundedContextAttribute
+#### 2.1.0 - 21.03.2018
+* Discovery for contracts based on `[DataContractAttribute]`. Discovery of contracts is done only within assemblies which have BoundedContextAttribute
 * Updates Cronus
-
-#### 2.1.0-beta0005 - 20.03.2018
-* Updates Cronus
-
-#### 2.1.0-beta0004 - 20.03.2018
 * When registering contracts using assemblies is obsolete now. Use IEnumerable<Type>
-
-#### 2.1.0-beta0003 - 19.03.2018
-* Updates Cronus
-
-#### 2.1.0-beta0002 - 19.03.2018
-* Updates Cronus
-
-#### 2.1.0-beta0001 - 16.03.2018
-* Discovery for contracts based on `[DataContractAttribute]`
 
 #### 2.0.4 - 28.02.2018
 * Updates Cronus
