@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Machine.Specifications;
 
@@ -10,7 +11,9 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.runtime_type_discover
         Establish context = () =>
         {
             ser = new SimpleTypeWithHeaders() { Int = 5, Date = DateTime.UtcNow.AddDays(1), String = "a" };
-            serializer = new JsonSerializer((typeof(NestedType).Assembly));
+            var contracts = new List<Type>();
+            contracts.AddRange(typeof(NestedType).Assembly.GetExportedTypes());
+            serializer = new JsonSerializer(contracts);
             serStream = new MemoryStream();
             serializer.Serialize(serStream, ser);
             serStream.Position = 0;

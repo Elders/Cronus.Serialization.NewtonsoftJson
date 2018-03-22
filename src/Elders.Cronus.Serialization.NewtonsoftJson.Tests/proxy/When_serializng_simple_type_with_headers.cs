@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Runtime.Serialization;
 using Machine.Specifications;
 
@@ -31,7 +33,10 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.proxy
         {
             ser = new ToProxy() { TestProperty = "aaaa" };
             ser.SetStuff();
-            serializer = new JsonSerializer(typeof(NestedType).Assembly, typeof(When_serializng_simple_type_with_headers).Assembly);
+            var contracts = new List<Type>();
+            contracts.AddRange(typeof(NestedType).Assembly.GetExportedTypes());
+            contracts.AddRange(typeof(When_serializng_simple_type_with_headers).Assembly.GetExportedTypes());
+            serializer = new JsonSerializer(contracts);
             serStream = new MemoryStream();
             serializer.Serialize(serStream, ser);
             serStream.Position = 0;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using Machine.Specifications;
@@ -68,8 +69,11 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
             {
                 ser = new SerializableException(ex);
             }
-            serializer = new JsonSerializer(typeof(NestedType).Assembly, typeof(Whem_SerializableException).Assembly);
-            serializer2 = new JsonSerializer(typeof(NestedType).Assembly, typeof(Whem_SerializableException).Assembly);
+            var contracts = new List<Type>();
+            contracts.AddRange(typeof(NestedType).Assembly.GetExportedTypes());
+            contracts.AddRange(typeof(Whem_SerializableException).Assembly.GetExportedTypes());
+            serializer = new JsonSerializer(contracts);
+            serializer2 = new JsonSerializer(contracts);
             serStream = new MemoryStream();
             serializer.Serialize(serStream, ser);
             serStream.Position = 0;

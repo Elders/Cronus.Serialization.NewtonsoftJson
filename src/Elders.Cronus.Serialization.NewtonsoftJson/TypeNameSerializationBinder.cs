@@ -1,6 +1,6 @@
-﻿using System.Reflection;
-using System.Runtime.Serialization;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Elders.Cronus.Serialization.NewtonsoftJson.Logging;
 using Newtonsoft.Json.Serialization;
 
@@ -14,9 +14,15 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
 
         private readonly ContractsRepository contractRepository;
 
-        public TypeNameSerializationBinder(Assembly[] contractAssemblyes)
+        [Obsolete("Use TypeNameSerializationBinder(IEnumerable<Type> contracts). Will be removed in version 3.0.0")]
+        public TypeNameSerializationBinder(Assembly[] contractAssemblies)
         {
-            this.contractRepository = new ContractsRepository(contractAssemblyes);
+            this.contractRepository = new ContractsRepository(contractAssemblies);
+        }
+
+        public TypeNameSerializationBinder(IEnumerable<Type> contracts)
+        {
+            this.contractRepository = new ContractsRepository(contracts);
         }
 
         public void BindToName(Type serializedType, out string assemblyName, out string typeName)

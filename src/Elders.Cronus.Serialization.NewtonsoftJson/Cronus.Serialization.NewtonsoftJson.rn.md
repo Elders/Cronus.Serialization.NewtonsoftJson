@@ -1,10 +1,15 @@
+#### 2.1.0 - 21.03.2018
+* Discovery for contracts based on `[DataContractAttribute]`. Discovery of contracts is done only within assemblies which have BoundedContextAttribute
+* Updates Cronus
+* When registering contracts using assemblies is obsolete now. Use IEnumerable<Type>
+
 #### 2.0.4 - 28.02.2018
 * Updates Cronus
 
 #### 2.0.3 - 26.02.2018
 * Updates Cronus
 
-#### 2.0.2 - 20.02.2018
+#### 2.0.2 - 20.02.2018.
 * Downgrades Newtonsoft.Json to 10.0.3
 
 #### 2.0.1 - 20.02.2018

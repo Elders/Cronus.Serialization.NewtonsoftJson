@@ -1,9 +1,11 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using Elders.Cronus.Serialization.Newtonsofst.Jsson;
 using Elders.Cronus.Serializer;
 using Newtonsoft.Json;
-using System.IO;
 using Newtonsoft.Json.Serialization;
-using Elders.Cronus.Serialization.Newtonsofst.Jsson;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson
 {
@@ -13,6 +15,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
 
         Newtonsoft.Json.JsonSerializer serializer;
 
+        [Obsolete("Use ContractsRepository(IEnumerable<Type> contracts). Will be removed in version 3.0.0")]
         public JsonSerializer(params Assembly[] assembliesContainingContracts)
         {
             settings = new JsonSerializerSettings();
@@ -25,6 +28,22 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
             settings.Formatting = Formatting.Indented;
             settings.MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead;
             settings.SerializationBinder = new TypeNameSerializationBinder(assembliesContainingContracts);
+            settings.ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor;
+            serializer = Newtonsoft.Json.JsonSerializer.Create(settings);
+        }
+
+        public JsonSerializer(IEnumerable<Type> contracts)
+        {
+            settings = new JsonSerializerSettings();
+            settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            settings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+            settings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+            settings.ContractResolver = new DataMemberContractResolver();
+            settings.TypeNameHandling = TypeNameHandling.Objects;
+            settings.TypeNameAssemblyFormatHandling = Newtonsoft.Json.TypeNameAssemblyFormatHandling.Simple;
+            settings.Formatting = Formatting.Indented;
+            settings.MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead;
+            settings.SerializationBinder = new TypeNameSerializationBinder(contracts);
             settings.ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor;
             serializer = Newtonsoft.Json.JsonSerializer.Create(settings);
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Machine.Specifications;
 
@@ -10,7 +11,9 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
         Establish context = () =>
         {
             ser = new NestedTypeWithHeaders() { Int = 5, Date = DateTime.UtcNow.AddDays(1), String = "a", Nested = new SimpleNestedTypeWithHeaders() { Int = 4, Date = DateTime.UtcNow.AddDays(2), String = "b" } };
-            serializer = new JsonSerializer((typeof(NestedType).Assembly));
+            var contracts = new List<Type>();
+            contracts.AddRange(typeof(NestedType).Assembly.GetExportedTypes());
+            serializer = new JsonSerializer(contracts);
             serStream = new MemoryStream();
             serializer.Serialize(serStream, ser);
             serStream.Position = 0;

@@ -1,8 +1,8 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
 using System.Collections.Generic;
-using System;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson
 {
@@ -28,6 +28,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
             }
         }
 
+        [Obsolete("Use ContractsRepository(IEnumerable<Type> contracts). Will be removed in version 3.0.0")]
         public ContractsRepository(IEnumerable<Assembly> assemblies) : this(assemblies.Distinct().SelectMany(x => x.ExportedTypes))
         {
 

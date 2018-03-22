@@ -17,8 +17,8 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
             var value = new UndefinedDictionaryInheritance() { String = "value", Nested = new UndefinedDictionaryInheritance() { String = "Nested value" } };
             ser.Nested.Add(key, value);
 
-            serializer = new JsonSerializer((typeof(NestedType).Assembly));
-            serializer2 = new JsonSerializer((typeof(NestedType).Assembly));
+            serializer = new JsonSerializer((typeof(NestedType).Assembly.GetExportedTypes()));
+            serializer2 = new JsonSerializer((typeof(NestedType).Assembly.GetExportedTypes()));
             serStream = new MemoryStream();
             serializer.Serialize(serStream, ser);
             serStream.Position = 0;

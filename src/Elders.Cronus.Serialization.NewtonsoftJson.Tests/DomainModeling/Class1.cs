@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using Elders.Cronus.DomainModeling;
@@ -14,8 +15,10 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
         Establish context = () =>
         {
             ser = new WorkId(WorkGuid, new JobId(JobId));
-            serializer = new JsonSerializer(typeof(WorkId).Assembly, typeof(Whem_EntityId).Assembly);
-            serializer2 = new JsonSerializer(typeof(WorkId).Assembly, typeof(Whem_EntityId).Assembly);
+            var contracts = new List<Type>();
+            contracts.AddRange(typeof(WorkId).Assembly.GetExportedTypes());
+            serializer = new JsonSerializer(contracts);
+            serializer2 = new JsonSerializer(contracts);
             serStream = new MemoryStream();
             serializer.Serialize(serStream, ser);
             serStream.Position = 0;
