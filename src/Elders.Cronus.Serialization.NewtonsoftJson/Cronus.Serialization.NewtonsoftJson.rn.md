@@ -1,3 +1,7 @@
+#### 5.0.0-beta0001 - 16.09.2018
+* Targeted .net frameworks are only netstandard2.0 and net472
+* Updates packages
+
 #### 2.1.0 - 21.03.2018
 * Discovery for contracts based on `[DataContractAttribute]`. Discovery of contracts is done only within assemblies which have BoundedContextAttribute
 * Updates Cronus
