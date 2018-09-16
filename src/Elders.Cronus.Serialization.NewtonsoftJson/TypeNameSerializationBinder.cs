@@ -8,7 +8,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
 {
     public class TypeNameSerializationBinder : ISerializationBinder
     {
-        static ILog log = LogProvider.GetLogger(typeof(TypeNameSerializationBinder));
+        private static readonly ILog log = LogProvider.GetLogger(typeof(TypeNameSerializationBinder));
 
         static Assembly NetAssembly = typeof(object).Assembly;
 

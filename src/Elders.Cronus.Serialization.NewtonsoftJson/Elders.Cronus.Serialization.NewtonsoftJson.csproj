@@ -1,43 +1,52 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net472</TargetFrameworks>
+  </PropertyGroup>
 
-    <!--Nuget-->
-    <PropertyGroup>
-        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-        <PackageId>Cronus.Serialization.NewtonsoftJson</PackageId>
-        <PackageLicenseUrl>https://github.com/Elders/Cronus/blob/master/LICENSE</PackageLicenseUrl>
-        <PackageProjectUrl>http://Elders.github.io/Cronus</PackageProjectUrl>
-        <PackageTags>CQRS DDD ES Event store sourcing</PackageTags>
-        <RepositoryUrl>https://github.com/Elders/Cronus</RepositoryUrl>
-        <PackageIconUrl>https://raw.githubusercontent.com/Elders/logo/master/cronus/frame.png</PackageIconUrl>
-        <RepositoryType>Framework</RepositoryType>
-        <Authors>Elders</Authors>
-    </PropertyGroup>
+  <!--Nuget-->
+  <PropertyGroup>
+    <PackageId>Cronus.Serialization.NewtonsoftJson</PackageId>
+    <Product>Cronus</Product>
+    <Authors>Elders OSS</Authors>
+    <Copyright>Copyright © Elders OSS 2013</Copyright>
+    <Description>Cronus is a lightweight framework for dispatching and receiving messages between microservices with DDD/CQRS in mind</Description>
+    <PackageTags>CQRS DDD ES Event store sourcing</PackageTags>
+    <PackageLicenseUrl>https://github.com/Elders/Cronus/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Elders/Cronus</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Elders/Cronus.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageIconUrl>https://raw.githubusercontent.com/Elders/logo/master/cronus/frame.png</PackageIconUrl>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>Elders.Cronus.Serialization.NewtonsoftJson</AssemblyName>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <RootNamespace>Elders.Cronus.Serialization.NewtonsoftJson</RootNamespace>
+  </PropertyGroup>
 
-    <!--netstandard2.0-->
-    <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
-        <DefineConstants>TRACE;DEBUG;NETSTANDARD2_0;LIBLOG_PORTABLE</DefineConstants>
-    </PropertyGroup>
-    <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
-        <PackageReference Include="Microsoft.CSharp" Version="4.4.1" />
-    </ItemGroup>
+  <!--netstandard2.0-->
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD2_0</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+  </ItemGroup>
 
-    <!--net45-->
-    <PropertyGroup Condition="'$(TargetFramework)'=='net45'">
-        <DefineConstants>TRACE;DEBUG;LIBLOG_PORTABLE</DefineConstants>
-    </PropertyGroup>
-    <ItemGroup Condition="'$(TargetFramework)'=='net45'">
-        <Reference Include="mscorlib" />
-        <Reference Include="System" />
-        <Reference Include="System.Core" />
-        <Reference Include="Microsoft.CSharp" />
-    </ItemGroup>
+  <!--net45-->
+  <PropertyGroup Condition="'$(TargetFramework)'=='net45'">
+    <DefineConstants>TRACE;DEBUG;NETFULL</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='net45'">
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="LibLog" Version="4.2.6" />
-        <PackageReference Include="Cronus" Version="4.1.0" />
-        <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Cronus" Version="5.0.0-beta0036" />
+    <PackageReference Include="LibLog" Version="5.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
 </Project>
