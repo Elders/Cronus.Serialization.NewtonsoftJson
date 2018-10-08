@@ -1,3 +1,6 @@
+#### 5.0.0-discovery0001 - 08.10.2018
+* Adds JsonSerializerDiscovery
+
 #### 5.0.0-beta0001 - 16.09.2018
 * Targeted .net frameworks are only netstandard2.0 and net472
 * Updates packages
