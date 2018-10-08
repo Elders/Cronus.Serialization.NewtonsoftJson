@@ -16,21 +16,13 @@ namespace Elders.Cronus.Pipeline.Config
                 .SelectMany(ass => ass.GetExportedTypes())
                 .ToList();
 
-            //contracts.AddRange(typeof(IMessage).Assembly.GetExportedTypes());
-            //contracts.AddRange(typeof(CronusAssembly).Assembly.GetExportedTypes());
-
             return new JsonSerializer(contracts);
         }
 
         protected override DiscoveryResult<ISerializer> DiscoverFromAssemblies(DiscoveryContext context)
         {
             var result = new DiscoveryResult<ISerializer>();
-            result.Models.Add(new DiscoveredModel()
-            {
-                AbstractionType = typeof(ISerializer),
-                ImplementationType = typeof(JsonSerializer),
-                Instance = GetSerializer(context)
-            });
+            result.Models.Add(new DiscoveredModel(typeof(ISerializer), typeof(JsonSerializer), GetSerializer(context)));
 
             return result;
         }
