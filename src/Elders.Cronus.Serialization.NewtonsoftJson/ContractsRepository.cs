@@ -28,12 +28,6 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
             }
         }
 
-        [Obsolete("Use ContractsRepository(IEnumerable<Type> contracts). Will be removed in version 3.0.0")]
-        public ContractsRepository(IEnumerable<Assembly> assemblies) : this(assemblies.Distinct().SelectMany(x => x.ExportedTypes))
-        {
-
-        }
-
         public bool TryGet(Type type, out string name)
         {
             return typeToName.TryGetValue(type, out name);
