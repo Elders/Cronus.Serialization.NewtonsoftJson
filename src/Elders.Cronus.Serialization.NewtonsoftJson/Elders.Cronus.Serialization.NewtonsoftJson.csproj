@@ -9,7 +9,7 @@
     <Product>Cronus</Product>
     <Authors>Elders OSS</Authors>
     <Copyright>Copyright © Elders OSS 2013</Copyright>
-    <Description>Cronus is a lightweight framework for dispatching and receiving messages between microservices with DDD/CQRS in mind</Description>
+    <Description>Cronus is a lightweight framework for building event driven systems with DDD/CQRS in mind</Description>
     <PackageTags>CQRS DDD ES Event store sourcing</PackageTags>
     <PackageLicenseUrl>https://github.com/Elders/Cronus/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Elders/Cronus</PackageProjectUrl>
@@ -30,11 +30,11 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
   </ItemGroup>
 
-  <!--net45-->
-  <PropertyGroup Condition="'$(TargetFramework)'=='net45'">
+  <!--net472-->
+  <PropertyGroup Condition="'$(TargetFramework)'=='net472'">
     <DefineConstants>TRACE;DEBUG;NETFULL</DefineConstants>
   </PropertyGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net45'">
+  <ItemGroup Condition="'$(TargetFramework)'=='net472'">
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cronus" Version="5.0.0-beta0036" />
+    <PackageReference Include="Cronus" Version="5.0.0-discovery0002" />
     <PackageReference Include="LibLog" Version="5.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
