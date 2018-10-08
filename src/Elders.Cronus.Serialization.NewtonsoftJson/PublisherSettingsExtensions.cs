@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Elders.Cronus.IocContainer;
 using Elders.Cronus.Serialization.NewtonsoftJson;
-using Elders.Cronus.Serializer;
 
 namespace Elders.Cronus.Pipeline.Config
 {

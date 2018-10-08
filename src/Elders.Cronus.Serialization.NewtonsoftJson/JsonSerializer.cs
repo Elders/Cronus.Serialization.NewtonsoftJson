@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using Elders.Cronus.Serialization.Newtonsofst.Jsson;
-using Elders.Cronus.Serializer;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
