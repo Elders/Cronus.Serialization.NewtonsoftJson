@@ -8,22 +8,24 @@ namespace Elders.Cronus.Pipeline.Config
 {
     public class JsonSerializerDiscovery : DiscoveryBasedOnExecutingDirAssemblies<ISerializer>
     {
-        protected ISerializer GetSerializer(DiscoveryContext context)
+        protected override DiscoveryResult<ISerializer> DiscoverFromAssemblies(DiscoveryContext context)
+        {
+            return new DiscoveryResult<ISerializer>(GetModels(context));
+        }
+
+        IEnumerable<DiscoveredModel> GetModels(DiscoveryContext context)
+        {
+            yield return new DiscoveredModel(typeof(ISerializer), GetSerializer(context));
+        }
+
+        protected virtual ISerializer GetSerializer(DiscoveryContext context)
         {
             List<Type> contracts = context.Assemblies
                 .Where(asm => ReferenceEquals(default(BoundedContextAttribute), asm.GetAssemblyAttribute<BoundedContextAttribute>()) == false)
-                .SelectMany(ass => ass.GetExportedTypes())
+                .SelectMany(ass => ass.GetLoadableTypes())
                 .ToList();
 
             return new JsonSerializer(contracts);
-        }
-
-        protected override DiscoveryResult<ISerializer> DiscoverFromAssemblies(DiscoveryContext context)
-        {
-            var result = new DiscoveryResult<ISerializer>();
-            result.Models.Add(new DiscoveredModel(typeof(ISerializer), typeof(JsonSerializer), GetSerializer(context)));
-
-            return result;
         }
     }
 }
