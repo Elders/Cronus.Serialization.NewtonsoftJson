@@ -21,7 +21,6 @@ namespace Elders.Cronus.Pipeline.Config
         protected virtual ISerializer GetSerializer(DiscoveryContext context)
         {
             List<Type> contracts = context.Assemblies
-                .Where(asm => ReferenceEquals(default(BoundedContextAttribute), asm.GetAssemblyAttribute<BoundedContextAttribute>()) == false)
                 .SelectMany(ass => ass.GetLoadableTypes())
                 .ToList();
 
