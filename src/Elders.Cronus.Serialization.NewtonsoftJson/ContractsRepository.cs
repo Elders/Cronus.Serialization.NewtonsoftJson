@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Elders.Cronus.Serialization.NewtonsoftJson.Logging;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson
 {
     public class ContractsRepository
     {
+        private static readonly ILog log = LogProvider.GetLogger(typeof(ContractsRepository));
+
         readonly Dictionary<Type, string> typeToName = new Dictionary<Type, string>();
         readonly Dictionary<string, Type> nameToType = new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
 
@@ -20,7 +23,10 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
                     {
                         var contractName = contract.GetAttrubuteValue<DataContractAttribute, string>(x => x.Name);
                         if (string.IsNullOrEmpty(contractName))
-                            throw new InvalidOperationException(String.Format("Missing DataContractAttribute Name for Type {0}", contract));
+                        {
+                            log.Warn("Missing DataContractAttribute.Name for Type {0}", contract);
+                            continue;
+                        }
                         Map(contract, contractName);
                     }
                 }
