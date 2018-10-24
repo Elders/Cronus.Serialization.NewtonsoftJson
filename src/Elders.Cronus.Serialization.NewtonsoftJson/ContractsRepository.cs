@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.Serialization;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson
@@ -20,7 +19,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
                     if (contract.HasAttribute<DataContractAttribute>())
                     {
                         var contractName = contract.GetAttrubuteValue<DataContractAttribute, string>(x => x.Name);
-                        if (String.IsNullOrEmpty(contractName))
+                        if (string.IsNullOrEmpty(contractName))
                             throw new InvalidOperationException(String.Format("Missing DataContractAttribute Name for Type {0}", contract));
                         Map(contract, contractName);
                     }
