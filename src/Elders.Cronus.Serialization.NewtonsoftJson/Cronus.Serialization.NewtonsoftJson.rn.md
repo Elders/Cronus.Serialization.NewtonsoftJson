@@ -1,3 +1,6 @@
+#### 5.0.0-discovery0005 - 24.10.2018
+* When a type fails to comply with DataContract requirements it is skipped instead of throwing an exception
+
 #### 5.0.0-discovery0004 - 24.10.2018
 * Removes old Registration method
 * Removes bounded context check
