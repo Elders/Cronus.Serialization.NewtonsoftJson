@@ -1,3 +1,7 @@
+#### 5.0.0-discovery0004 - 24.10.2018
+* Removes old Registration method
+* Removes bounded context check
+
 #### 5.0.0-discovery0003 - 16.10.2018
 * Updates Cronus
 
