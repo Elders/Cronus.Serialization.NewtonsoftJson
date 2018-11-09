@@ -1,3 +1,6 @@
+#### 5.0.0-discovery0007 - 10.11.2018
+* Improves logging
+
 #### 5.0.0-discovery0006 - 28.10.2018
 * Bumps Cronus
 
