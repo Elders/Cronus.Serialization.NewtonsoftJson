@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using Elders.Cronus.Serialization.NewtonsoftJson.Logging;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson
@@ -17,6 +18,8 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
         {
             if (contracts != null)
             {
+                StringBuilder contractErrors = new StringBuilder();
+                contractErrors.AppendLine("The following types are missing `DataContractAttribute.Name` and they will NOT be added to the serializer's contracts repository. Usually you will here see types which are not part of your solution but dependencies. However it is worth checking the list bellow when something is not working properly.");
                 foreach (var contract in contracts)
                 {
                     if (contract.HasAttribute<DataContractAttribute>())
@@ -24,12 +27,15 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
                         var contractName = contract.GetAttrubuteValue<DataContractAttribute, string>(x => x.Name);
                         if (string.IsNullOrEmpty(contractName))
                         {
-                            log.Warn("Missing DataContractAttribute.Name for Type {0}", contract);
+                            contractErrors.AppendLine(contract.FullName);
                             continue;
                         }
                         Map(contract, contractName);
                     }
                 }
+
+                if (contractErrors.Length > 1)
+                    log.Warn(contractErrors.ToString());
             }
         }
 
@@ -48,7 +54,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
         private void Map(Type type, string name)
         {
             if (nameToType.ContainsKey(name) && nameToType[name] != type)
-                throw new InvalidOperationException(String.Format("Duplicate contract registration {0}", name));
+                throw new InvalidOperationException(string.Format("Duplicate contract registration {0}", name));
 
             typeToName.Add(type, name);
             nameToType.Add(name, type);
