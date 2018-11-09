@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cronus" Version="5.0.0-discovery0016" />
+    <PackageReference Include="Cronus" Version="5.0.0-discovery0017" />
     <PackageReference Include="LibLog" Version="5.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
