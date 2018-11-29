@@ -1,3 +1,11 @@
+#### 5.0.0 - 29.11.2018
+* Improves logging
+* When a type fails to comply with DataContract requirements it is skipped instead of throwing an exception
+* Removes old Registration method
+* Removes bounded context check
+* Adds JsonSerializerDiscovery
+* Targeted .net frameworks are only netstandard2.0 and net472
+
 #### 2.1.0 - 21.03.2018
 * Discovery for contracts based on `[DataContractAttribute]`. Discovery of contracts is done only within assemblies which have BoundedContextAttribute
 * Updates Cronus

@@ -8,17 +8,11 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
 {
     public class TypeNameSerializationBinder : ISerializationBinder
     {
-        static ILog log = LogProvider.GetLogger(typeof(TypeNameSerializationBinder));
+        private static readonly ILog log = LogProvider.GetLogger(typeof(TypeNameSerializationBinder));
 
         static Assembly NetAssembly = typeof(object).Assembly;
 
         private readonly ContractsRepository contractRepository;
-
-        [Obsolete("Use TypeNameSerializationBinder(IEnumerable<Type> contracts). Will be removed in version 3.0.0")]
-        public TypeNameSerializationBinder(Assembly[] contractAssemblies)
-        {
-            this.contractRepository = new ContractsRepository(contractAssemblies);
-        }
 
         public TypeNameSerializationBinder(IEnumerable<Type> contracts)
         {

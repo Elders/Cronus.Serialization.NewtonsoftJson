@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.Serialization;
+using System.Text;
+using Elders.Cronus.Serialization.NewtonsoftJson.Logging;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson
 {
     public class ContractsRepository
     {
+        private static readonly ILog log = LogProvider.GetLogger(typeof(ContractsRepository));
+
         readonly Dictionary<Type, string> typeToName = new Dictionary<Type, string>();
         readonly Dictionary<string, Type> nameToType = new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
 
@@ -15,23 +18,25 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
         {
             if (contracts != null)
             {
+                StringBuilder contractErrors = new StringBuilder();
+                contractErrors.AppendLine("The following types are missing `DataContractAttribute.Name` and they will NOT be added to the serializer's contracts repository. Usually you will here see types which are not part of your solution but dependencies. However it is worth checking the list bellow when something is not working properly.");
                 foreach (var contract in contracts)
                 {
                     if (contract.HasAttribute<DataContractAttribute>())
                     {
                         var contractName = contract.GetAttrubuteValue<DataContractAttribute, string>(x => x.Name);
-                        if (String.IsNullOrEmpty(contractName))
-                            throw new InvalidOperationException(String.Format("Missing DataContractAttribute Name for Type {0}", contract));
+                        if (string.IsNullOrEmpty(contractName))
+                        {
+                            contractErrors.AppendLine(contract.FullName);
+                            continue;
+                        }
                         Map(contract, contractName);
                     }
                 }
+
+                if (contractErrors.Length > 1)
+                    log.Warn(contractErrors.ToString());
             }
-        }
-
-        [Obsolete("Use ContractsRepository(IEnumerable<Type> contracts). Will be removed in version 3.0.0")]
-        public ContractsRepository(IEnumerable<Assembly> assemblies) : this(assemblies.Distinct().SelectMany(x => x.ExportedTypes))
-        {
-
         }
 
         public bool TryGet(Type type, out string name)
@@ -49,7 +54,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
         private void Map(Type type, string name)
         {
             if (nameToType.ContainsKey(name) && nameToType[name] != type)
-                throw new InvalidOperationException(String.Format("Duplicate contract registration {0}", name));
+                throw new InvalidOperationException(string.Format("Duplicate contract registration {0}", name));
 
             typeToName.Add(type, name);
             nameToType.Add(name, type);
