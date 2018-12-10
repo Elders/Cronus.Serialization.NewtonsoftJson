@@ -1,3 +1,6 @@
+#### 5.1.0 - 10.12.2018
+* Updates packages
+
 #### 5.0.0 - 29.11.2018
 * Improves logging
 * When a type fails to comply with DataContract requirements it is skipped instead of throwing an exception

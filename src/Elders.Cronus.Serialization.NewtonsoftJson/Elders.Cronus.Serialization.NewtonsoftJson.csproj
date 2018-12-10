@@ -42,8 +42,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cronus" Version="5.0.0-discovery0017" />
-    <PackageReference Include="LibLog" Version="5.0.2">
+    <PackageReference Include="Cronus" Version="5.1.0" />
+    <PackageReference Include="LibLog" Version="5.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
