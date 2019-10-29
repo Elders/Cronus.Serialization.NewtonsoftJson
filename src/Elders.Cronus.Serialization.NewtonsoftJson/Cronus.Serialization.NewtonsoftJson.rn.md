@@ -1,3 +1,6 @@
+#### 6.0.0-beta0001 - 29.10.2018
+* Updates packages
+
 #### 5.1.0 - 10.12.2018
 * Updates packages
 
