@@ -6,7 +6,7 @@ using Elders.Cronus.Serialization.NewtonsoftJson;
 
 namespace Elders.Cronus.Pipeline.Config
 {
-    public class JsonSerializerDiscovery : DiscoveryBasedOnExecutingDirAssemblies<ISerializer>
+    public class JsonSerializerDiscovery : DiscoveryBase<ISerializer>
     {
         protected override DiscoveryResult<ISerializer> DiscoverFromAssemblies(DiscoveryContext context)
         {
