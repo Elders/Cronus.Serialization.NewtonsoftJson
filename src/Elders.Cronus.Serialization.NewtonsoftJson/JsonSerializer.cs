@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Elders.Cronus.Serialization.Newtonsofst.Jsson;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson
@@ -33,7 +34,13 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
         {
             //DO NOT DISPOSE THE JsonTextReader!!! DISPOSING IT CLOSES THE EXTERNAL STREAM
             var jsonReader = new JsonTextReader(new StreamReader(str));
-            return serializer.Deserialize(jsonReader);
+            object result = serializer.Deserialize(jsonReader);
+            if (result is JObject)
+            {
+                result = (result as JObject).ToObject<CronusMessage>();
+            }
+
+            return result;
         }
 
         public void Serialize<T>(System.IO.Stream str, T message)

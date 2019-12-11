@@ -3,4 +3,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Cronus.DomainModeling" Version="6.0.0-beta0007" />
+  </ItemGroup>
 </Project>
