@@ -8,7 +8,6 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
     {
         [DataMember(Order = 1)]
         public string String { get; set; }
-
         [DataMember(Order = 2)]
         public int Int { get; set; }
 

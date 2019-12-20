@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -13,6 +14,8 @@ namespace Elders.Cronus.Serialization.Newtonsofst.Jsson
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {
             JsonProperty customMember = base.CreateProperty(member, memberSerialization);
+            if (member.HasAttribute<DataMemberAttribute>())
+                customMember.PropertyName = customMember.Order.ToString();
 
             if (!customMember.Writable)
             {
@@ -25,31 +28,6 @@ namespace Elders.Cronus.Serialization.Newtonsofst.Jsson
             }
 
             return customMember;
-        }
-
-        protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
-        {
-            var allProperties = base.CreateProperties(type, memberSerialization);
-            if (allProperties.Any() == false)
-                return allProperties;
-
-            for (int i = allProperties.Count - 1; i >= 0; i--)
-            {
-                JsonProperty currentProperty = allProperties[i];
-                if (currentProperty.HasMemberAttribute)
-                {
-                    var memberInfo = type.GetAllMembers().Where(m => m.Name.Equals(currentProperty.PropertyName)).SingleOrDefault();
-                    if (memberInfo is null == false)
-                    {
-                        JsonProperty newProperty = CreateProperty(memberInfo, memberSerialization);
-                        newProperty.PropertyName = currentProperty.Order.ToString();
-
-                        allProperties.Add(newProperty);
-                    }
-                }
-            }
-
-            return allProperties;
         }
 
         protected override JsonContract CreateContract(Type objectType)

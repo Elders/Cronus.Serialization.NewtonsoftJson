@@ -11,9 +11,6 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
     {
         private static readonly ILog log = LogProvider.GetLogger(typeof(ContractsRepository));
 
-        readonly Dictionary<Type, string> typeToName_DataContract = new Dictionary<Type, string>();
-        readonly Dictionary<string, Type> nameToType_DataContract = new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
-
         readonly Dictionary<Type, string> typeToName = new Dictionary<Type, string>();
         readonly Dictionary<string, Type> nameToType = new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
 
@@ -44,39 +41,18 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
 
         public bool TryGet(Type type, out string name)
         {
-            if (typeToName_DataContract.TryGetValue(type, out name))
-            {
-                return true;
-            }
-            else
-            {
-                return typeToName.TryGetValue(type, out name);
-            }
+            return typeToName.TryGetValue(type, out name);
         }
 
         public bool TryGet(string name, out Type type)
         {
-            if (nameToType_DataContract.TryGetValue(name, out type))
-            {
-                return true;
-            }
-            else
-            {
-                return nameToType.TryGetValue(name, out type);
-            }
+            return nameToType.TryGetValue(name, out type);
         }
 
-        public IEnumerable<Type> Contracts { get { return typeToName_DataContract.Keys.ToList().AsReadOnly(); } }
+        public IEnumerable<Type> Contracts { get { return typeToName.Keys.ToList().AsReadOnly(); } }
 
         private void Map(Type type, string name)
         {
-            if (nameToType_DataContract.ContainsKey(name) && nameToType_DataContract[name] != type)
-                throw new InvalidOperationException(string.Format("Duplicate contract registration {0}", name));
-
-            typeToName_DataContract.Add(type, name);
-            nameToType_DataContract.Add(name, type);
-
-            name = type.FullName;
             if (nameToType.ContainsKey(name) && nameToType[name] != type)
                 throw new InvalidOperationException(string.Format("Duplicate contract registration {0}", name));
 
