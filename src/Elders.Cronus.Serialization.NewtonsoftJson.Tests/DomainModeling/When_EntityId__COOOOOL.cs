@@ -8,7 +8,7 @@ using Machine.Specifications;
 namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
 {
     [Subject(typeof(JsonSerializer))]
-    public class Whem_EntityId
+    public class When_EntityId__COOOOOL
     {
         static Guid WorkGuid = new Guid("eeceebfd-9f2f-4c0a-8242-6d7df1470d13");
         static Guid JobId = new Guid("debd3009-120b-45d9-84ba-e2216f597de0");

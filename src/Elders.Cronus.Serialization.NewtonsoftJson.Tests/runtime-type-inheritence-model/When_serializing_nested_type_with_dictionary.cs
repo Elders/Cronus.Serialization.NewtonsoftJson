@@ -7,7 +7,7 @@ using Machine.Specifications;
 namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
 {
     [Subject(typeof(JsonSerializer))]
-    public class Whem_serializing_nested_type_with_dictionary
+    public class When_serializing_nested_type_with_dictionary
     {
 
         Establish context = () =>
