@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Elders.Cronus.Serialization.NewtonsoftJson.Logging;
 using Newtonsoft.Json.Serialization;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson
 {
     public class TypeNameSerializationBinder : ISerializationBinder
     {
-        private static readonly ILog log = LogProvider.GetLogger(typeof(TypeNameSerializationBinder));
-
         static Assembly NetAssembly = typeof(object).Assembly;
 
         private readonly ContractsRepository contractRepository;

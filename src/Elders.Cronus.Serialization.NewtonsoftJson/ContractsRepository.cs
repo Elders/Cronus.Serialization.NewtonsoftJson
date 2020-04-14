@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
-using Elders.Cronus.Serialization.NewtonsoftJson.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson
 {
     public class ContractsRepository
     {
-        private static readonly ILog log = LogProvider.GetLogger(typeof(ContractsRepository));
+        private static readonly ILogger logger = CronusLogger.CreateLogger(typeof(ContractsRepository));
 
         readonly Dictionary<Type, string> typeToName = new Dictionary<Type, string>();
         readonly Dictionary<string, Type> nameToType = new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
@@ -35,7 +35,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
                 }
 
                 if (contractErrors.Length > 1)
-                    log.Warn(contractErrors.ToString());
+                    logger.Warn(contractErrors.ToString());
             }
         }
 
