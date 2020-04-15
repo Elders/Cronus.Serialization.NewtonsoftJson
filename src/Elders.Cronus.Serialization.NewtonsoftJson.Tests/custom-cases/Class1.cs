@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
-using Elders.Cronus.DomainModeling;
 using Machine.Specifications;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
@@ -29,17 +28,16 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
         public virtual DateTime UpdatedAt { get; set; }
     }
     [DataContract(Name = "bc0b0ded-1042-46db-a8d3-9fe85fba2d06")]
-    public class UserId : GuidId
+    public class UserId : AggregateRootId
     {
         protected UserId() { }
-        public UserId(GuidId id) : base(id, "User") { }
-        public UserId(Guid id) : base(id, "User") { }
+        public UserId(Guid id) : base(id.ToString(), "User", "elders") { }
     }
     [DataContract(Name = "20d462ee-3340-4a93-9e9f-b74b2a373881")]
-    public class ConversationId : GuidId
+    public class ConversationId : AggregateRootId
     {
         protected ConversationId() { }
-        public ConversationId(Guid id) : base(id, "Conversation") { }
+        public ConversationId(Guid id) : base(id.ToString(), "Conversation", "elders") { }
     }
     [DataContract(Name = "4b1ab5ff-e7b5-48f4-bceb-a85671fd281f")]
     public class UserConversationsHolder
