@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
-using Elders.Cronus.DomainModeling;
 using Machine.Specifications;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
 {
     [Subject(typeof(JsonSerializer))]
-    public class Whem_EntityId
+    public class When_EntityId__COOOOOL
     {
         static Guid WorkGuid = new Guid("eeceebfd-9f2f-4c0a-8242-6d7df1470d13");
         static Guid JobId = new Guid("debd3009-120b-45d9-84ba-e2216f597de0");
@@ -35,16 +34,16 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
     }
 
     [DataContract(Name = "33908fe3-89d8-458f-975f-4a1e273c2134")]
-    public class WorkId : EntityGuidId<JobId>
+    public class WorkId : EntityId<JobId>
     {
         protected WorkId() { }
-        public WorkId(Guid id, JobId jobId) : base(id, jobId, "Work") { }
+        public WorkId(Guid id, JobId jobId) : base(id.ToString(), jobId, "Work") { }
     }
 
     [DataContract(Name = "470532ba-fe38-4dd4-b825-26c81d75a64e")]
-    public class JobId : GuidId
+    public class JobId : AggregateRootId
     {
         protected JobId() { }
-        public JobId(Guid id) : base(id, "Job") { }
+        public JobId(Guid id) : base(id.ToString(), "Job", "elders") { }
     }
 }

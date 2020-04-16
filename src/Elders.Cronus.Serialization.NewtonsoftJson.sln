@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.3
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elders.Cronus.Serialization.NewtonsoftJson.Tests", "Elders.Cronus.Serialization.NewtonsoftJson.Tests\Elders.Cronus.Serialization.NewtonsoftJson.Tests.csproj", "{C7B52D62-E020-4810-9748-84C2A0E433C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elders.Cronus.Serialization.NewtonsoftJson.Tests", "Elders.Cronus.Serialization.NewtonsoftJson.Tests\Elders.Cronus.Serialization.NewtonsoftJson.Tests.csproj", "{C7B52D62-E020-4810-9748-84C2A0E433C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elders.Cronus.Serialization.NewtonsoftJson.Models", "Elders.Cronus.Serialization.NewtonsoftJson.Models\Elders.Cronus.Serialization.NewtonsoftJson.Models.csproj", "{18724F0F-FE76-4A5D-8A87-C1FC323B3179}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elders.Cronus.Serialization.NewtonsoftJson.Models", "Elders.Cronus.Serialization.NewtonsoftJson.Models\Elders.Cronus.Serialization.NewtonsoftJson.Models.csproj", "{18724F0F-FE76-4A5D-8A87-C1FC323B3179}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elders.Cronus.Serialization.NewtonsoftJson", "Elders.Cronus.Serialization.NewtonsoftJson\Elders.Cronus.Serialization.NewtonsoftJson.csproj", "{F6E4D746-001F-41FE-A568-597F0F3A059C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elders.Cronus.Serialization.NewtonsoftJson", "Elders.Cronus.Serialization.NewtonsoftJson\Elders.Cronus.Serialization.NewtonsoftJson.csproj", "{F6E4D746-001F-41FE-A568-597F0F3A059C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

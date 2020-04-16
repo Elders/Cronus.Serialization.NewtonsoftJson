@@ -1,3 +1,6 @@
+#### 6.0.0 - 16.04.2020
+* Updates packages
+
 #### 5.1.0 - 10.12.2018
 * Updates packages
 

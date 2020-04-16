@@ -8,11 +8,15 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
     {
         [DataMember(Order = 1)]
         public string String { get; set; }
+
         [DataMember(Order = 2)]
         public int Int { get; set; }
 
         [DataMember(Order = 3)]
         public DateTime Date { get; set; }
+
+        [DataMember(Order = 4)]
+        public StructType StructProp { get; set; }
     }
 
     [DataContract(Name = "099c2ee0-514f-4b73-b495-01341e3bef0f")]
