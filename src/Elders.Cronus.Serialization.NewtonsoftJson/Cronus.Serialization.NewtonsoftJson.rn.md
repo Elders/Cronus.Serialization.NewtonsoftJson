@@ -1,22 +1,4 @@
-#### 6.0.0-beta0007 - 15.04.2020
-* Update packages
-
-#### 6.0.0-beta0006 - 15.04.2020
-* Replaced LibLog
-
-#### 6.0.0-beta0005 - 08.04.2020
-* Updates packages
-
-#### 6.0.0-beta0004 - 26.03.2020
-* Updates packages
-
-#### 6.0.0-beta0003 - 11.12.2019
-* Updates packages
-
-#### 6.0.0-beta0002 - 11.12.2019
-* Updates packages
-
-#### 6.0.0-beta0001 - 29.10.2018
+#### 6.0.0 - 16.04.2020
 * Updates packages
 
 #### 5.1.0 - 10.12.2018
