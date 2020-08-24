@@ -10,6 +10,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
             Value = value;
             Value2 = 0;
         }
+
         [DataMember(Order = 1)]
         private readonly string Value;
 
