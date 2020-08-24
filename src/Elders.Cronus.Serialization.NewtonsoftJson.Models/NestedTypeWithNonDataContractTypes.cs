@@ -18,6 +18,4 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
         [DataMember(Order = 4)]
         public object Nested { get; set; }
     }
-
-
 }

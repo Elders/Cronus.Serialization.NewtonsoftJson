@@ -3,11 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
 {
-    public interface IUndefinedInterface
-    {
-
-    }
-
+    public interface IUndefinedInterface { }
 
     [DataContract(Name = "e85cd0f8-2da8-45d9-bb50-07dc887d9ee9")]
     public class NestedTypeWithUndefinedInterfaceInheritance
