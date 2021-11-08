@@ -4,6 +4,6 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Cronus.DomainModeling" Version="6.1.0" />
+    <PackageReference Include="Cronus.DomainModeling" Version="6.3.4" />
   </ItemGroup>
 </Project>
