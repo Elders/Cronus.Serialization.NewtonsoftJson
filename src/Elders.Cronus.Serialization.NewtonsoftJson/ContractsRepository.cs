@@ -35,7 +35,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
                 }
 
                 if (contractErrors.Length > 1)
-                    logger.Warn(contractErrors.ToString());
+                    logger.Warn(() => contractErrors.ToString());
             }
         }
 
