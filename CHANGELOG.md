@@ -1,3 +1,5 @@
+# [7.0.0-preview.1](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v6.1.1-preview.2...v7.0.0-preview.1) (2021-11-11)
+
 # [6.2.0](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v6.1.0...v6.2.0) (2021-11-08)
 
 
