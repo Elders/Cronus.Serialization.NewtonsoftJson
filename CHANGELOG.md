@@ -1,3 +1,10 @@
+# [7.0.0-preview.2](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v7.0.0-preview.1...v7.0.0-preview.2) (2021-12-01)
+
+
+### Bug Fixes
+
+* Transfers the release notes to CHANGELOG.md ([11c745c](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/commit/11c745c5f7508fea6ddcd605aad960d18ee7ba63))
+
 # [7.0.0-preview.1](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v6.2.0...v7.0.0-preview.1) (2021-11-30)
 
 
