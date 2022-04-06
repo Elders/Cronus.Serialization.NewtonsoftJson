@@ -1,3 +1,13 @@
+# [7.0.0](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v6.2.0...v7.0.0) (2022-04-06)
+
+
+### Bug Fixes
+
+* Add Cronus ([a515c18](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/commit/a515c181d74b9979f8491a416dac9965816eff16))
+* bump Microsoft.SourceLink.GitHub from 1.0.0 to 1.1.0 ([570465e](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/commit/570465ea708de3ed33ff2bb561de73fba92a1246))
+* Transfers the release notes to CHANGELOG.md ([11c745c](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/commit/11c745c5f7508fea6ddcd605aad960d18ee7ba63))
+* Update Cronus ([71dca7c](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/commit/71dca7c753006cacb07221ca931cf0313b5fb2e0))
+
 # [7.0.0-preview.3](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v7.0.0-preview.2...v7.0.0-preview.3) (2022-03-31)
 
 
