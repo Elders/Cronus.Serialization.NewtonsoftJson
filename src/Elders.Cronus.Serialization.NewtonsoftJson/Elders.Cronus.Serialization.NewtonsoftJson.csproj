@@ -32,7 +32,7 @@
 
   <ItemGroup>
     <PackageReference Include="Cronus" Version="7.0.0" />
-    <PackageReference Include="Cronus.DomainModeling" Version="7.0.0" />
+    <PackageReference Include="Cronus.DomainModeling" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
