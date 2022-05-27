@@ -1,3 +1,10 @@
+## [8.0.1](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v8.0.0...v8.0.1) (2022-05-27)
+
+
+### Bug Fixes
+
+* bump Microsoft.NET.Test.Sdk from 17.1.0 to 17.2.0 ([5335b18](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/commit/5335b1885149acfd783ccfcbec72c304118fb8ba))
+
 # [8.0.0](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v7.0.0...v8.0.0) (2022-05-27)
 
 # [7.0.0](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v6.2.0...v7.0.0) (2022-04-06)
