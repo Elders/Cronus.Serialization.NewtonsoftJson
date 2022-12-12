@@ -25,12 +25,12 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
             serializer.Serialize(serStream, ser);
             serStream.Position = 0;
         };
-        Because of_deserialization = () => { deser = (IUrn)serializer2.Deserialize(serStream); };
+        Because of_deserialization = () => { deser = (Urn)serializer2.Deserialize(serStream); };
 
         It should_not_be_null = () => deser.ShouldNotBeNull();
 
-        static IUrn ser;
-        static IUrn deser;
+        static Urn ser;
+        static Urn deser;
         static Stream serStream;
         static JsonSerializer serializer;
         static JsonSerializer serializer2;
