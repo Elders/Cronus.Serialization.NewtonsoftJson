@@ -36,6 +36,13 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
             return serializer.Deserialize(jsonReader);
         }
 
+        public object Deserialize(System.IO.Stream str, Type objectType)
+        {
+            //DO NOT DISPOSE THE JsonTextReader!!! DISPOSING IT CLOSES THE EXTERNAL STREAM
+            var jsonReader = new JsonTextReader(new StreamReader(str));
+            return serializer.Deserialize(jsonReader, objectType);
+        }
+
         public void Serialize<T>(System.IO.Stream str, T message)
         {
             // DO NOT DISPOSE THE STREAM WRITER!!! DISPOSING IT CLOSES THE EXTERNAL STREAM

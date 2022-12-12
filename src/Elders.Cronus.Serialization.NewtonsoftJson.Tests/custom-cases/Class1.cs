@@ -27,18 +27,21 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
         [DataMember(Order = 3)]
         public virtual DateTime UpdatedAt { get; set; }
     }
+
     [DataContract(Name = "bc0b0ded-1042-46db-a8d3-9fe85fba2d06")]
     public class UserId : AggregateRootId
     {
         protected UserId() { }
         public UserId(Guid id) : base(id.ToString(), "User", "elders") { }
     }
+
     [DataContract(Name = "20d462ee-3340-4a93-9e9f-b74b2a373881")]
     public class ConversationId : AggregateRootId
     {
         protected ConversationId() { }
         public ConversationId(Guid id) : base(id.ToString(), "Conversation", "elders") { }
     }
+
     [DataContract(Name = "4b1ab5ff-e7b5-48f4-bceb-a85671fd281f")]
     public class UserConversationsHolder
     {
@@ -49,6 +52,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
         [DataMember(Order = 1)]
         public virtual string Conversations { get; set; }
     }
+
     [DataContract(Name = "4591e41a-e8be-46d4-906f-3f23bfb8fe36")]
     public class ConversationParticipantItem
     {
