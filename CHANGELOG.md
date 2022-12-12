@@ -1,3 +1,10 @@
+# [8.1.0](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v8.0.2...v8.1.0) (2022-12-12)
+
+
+### Features
+
+* Updates packages ([05bf8d1](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/commit/05bf8d132a60b5abe1cf42fa4ef68a892e1d1fff))
+
 ## [8.0.2](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v8.0.1...v8.0.2) (2022-08-16)
 
 
