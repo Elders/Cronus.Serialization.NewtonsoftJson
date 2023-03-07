@@ -23,6 +23,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
         ""1"": ""Testing photo broadcasts to Promoters.. 1""
     }
 }";
+
         };
         Because of_deserialization = () =>
         {
