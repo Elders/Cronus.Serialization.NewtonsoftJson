@@ -16,7 +16,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
 
         public ContractsRepository(IEnumerable<Type> contracts)
         {
-            if (contracts != null)
+            if (contracts is not null)
             {
                 StringBuilder contractErrors = new StringBuilder();
                 contractErrors.AppendLine("The following types are missing `DataContractAttribute.Name` and they will NOT be added to the serializer's contracts repository. Usually you will here see types which are not part of your solution but dependencies. However it is worth checking the list bellow when something is not working properly.");
@@ -49,7 +49,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
             return nameToType.TryGetValue(name, out type);
         }
 
-        public IEnumerable<Type> Contracts { get { return typeToName.Keys.ToList().AsReadOnly(); } }
+        public IEnumerable<Type> Contracts { get { return typeToName.Keys; } }
 
         private void Map(Type type, string name)
         {

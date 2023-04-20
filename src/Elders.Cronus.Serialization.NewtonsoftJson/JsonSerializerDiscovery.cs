@@ -15,14 +15,13 @@ namespace Elders.Cronus.Pipeline.Config
 
         IEnumerable<DiscoveredModel> GetModels(DiscoveryContext context)
         {
-            yield return new DiscoveredModel(typeof(ISerializer), GetSerializer(context));
+            yield return new DiscoveredModel(typeof(ISerializer), GetSerializer(context)); // Singleton
         }
 
         protected virtual ISerializer GetSerializer(DiscoveryContext context)
         {
-            List<Type> contracts = context.Assemblies
-                .SelectMany(ass => ass.GetLoadableTypes())
-                .ToList();
+            IEnumerable<Type> contracts = context.Assemblies
+                .SelectMany(ass => ass.GetLoadableTypes());
 
             return new JsonSerializer(contracts);
         }

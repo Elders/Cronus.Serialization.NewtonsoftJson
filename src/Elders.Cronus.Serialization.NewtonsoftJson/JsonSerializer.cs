@@ -31,22 +31,24 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
 
         public object Deserialize(System.IO.Stream str)
         {
-            //DO NOT DISPOSE THE JsonTextReader!!! DISPOSING IT CLOSES THE EXTERNAL STREAM
-            var jsonReader = new JsonTextReader(new StreamReader(str));
-            return serializer.Deserialize(jsonReader);
+            using StreamReader sr = new StreamReader(str);
+            using JsonReader reader = new JsonTextReader(sr);
+
+            return serializer.Deserialize(reader);
         }
 
         public object Deserialize(System.IO.Stream str, Type objectType)
         {
-            //DO NOT DISPOSE THE JsonTextReader!!! DISPOSING IT CLOSES THE EXTERNAL STREAM
-            var jsonReader = new JsonTextReader(new StreamReader(str));
-            return serializer.Deserialize(jsonReader, objectType);
+            using StreamReader sr = new StreamReader(str);
+            using JsonReader reader = new JsonTextReader(sr);
+
+            return serializer.Deserialize(reader, objectType);
         }
 
         public void Serialize<T>(System.IO.Stream str, T message)
         {
-            // DO NOT DISPOSE THE STREAM WRITER!!! DISPOSING IT CLOSES THE EXTERNAL STREAM
-            var streamWriter = new StreamWriter(str);
+            StreamWriter streamWriter = new StreamWriter(str);
+
             serializer.Serialize(streamWriter, message);
             streamWriter.Flush();
         }
