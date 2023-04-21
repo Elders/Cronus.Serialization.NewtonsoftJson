@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
 {
     [DataContract(Name = "667f821e-4975-4295-a309-b399ae3f4c17")]
-    public class NestedTypeWithHeaders
+    public class NestedTypeWithHeaders : IMessage
     {
         [DataMember(Order = 1)]
         public string String { get; set; }
