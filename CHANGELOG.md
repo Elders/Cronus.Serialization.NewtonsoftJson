@@ -1,3 +1,10 @@
+# [9.0.0-preview.2](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v9.0.0-preview.1...v9.0.0-preview.2) (2023-04-21)
+
+
+### Bug Fixes
+
+* Adds a test for CronusMessage with raw payload ([a4c8816](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/commit/a4c88169970ea2c3530987c34224a91a63805e27))
+
 # [9.0.0-preview.1](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v8.1.1-preview.1...v9.0.0-preview.1) (2023-03-07)
 
 ## [8.1.1-preview.1](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v8.1.0...v8.1.1-preview.1) (2022-12-12)
