@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using Machine.Specifications;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
@@ -28,13 +27,13 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
                 }
             };
 
-            using var serStream = new MemoryStream();
-            serializer.Serialize(serStream, body);
+            data = serializer.SerializeToBytes(body);
 
-            ser = new CronusMessage(serStream.ToArray(), typeof(NestedTypeWithHeaders), new Dictionary<string, string>());
+            ser = new CronusMessage(data, typeof(NestedTypeWithHeaders), new Dictionary<string, string>());
             cmBytes = serializer.SerializeToBytes(ser);
         };
-        Because of_deserialization = () => deser = (CronusMessage)serializer.DeserializeFromBytes(cmBytes);
+
+        Because of_deserialization = () => deser = serializer.DeserializeFromBytes<CronusMessage>(cmBytes);
 
         It should_not_be_null = () => deser.ShouldNotBeNull();
         It should_have_the_same_byte_array = () => ByteArrayHelper.Compare(deser.PayloadRaw, ser.PayloadRaw).ShouldBeTrue();
@@ -44,5 +43,6 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
         static CronusMessage deser;
         static JsonSerializer serializer;
         static byte[] cmBytes;
+        static byte[] data;
     }
 }

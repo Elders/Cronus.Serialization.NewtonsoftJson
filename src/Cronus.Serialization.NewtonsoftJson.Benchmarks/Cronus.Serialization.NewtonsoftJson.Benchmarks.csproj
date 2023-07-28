@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.HighPerformance" Version="8.1.0" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.6" />
+    <PackageReference Include="BenchmarkDotNet.Annotations" Version="0.13.6" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Elders.Cronus.Serialization.NewtonsoftJson.Models\Elders.Cronus.Serialization.NewtonsoftJson.Models.csproj" />
     <ProjectReference Include="..\Elders.Cronus.Serialization.NewtonsoftJson\Elders.Cronus.Serialization.NewtonsoftJson.csproj" />
   </ItemGroup>
 

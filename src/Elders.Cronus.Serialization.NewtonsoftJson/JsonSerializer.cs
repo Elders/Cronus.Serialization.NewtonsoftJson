@@ -1,56 +1,102 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Text;
 using Elders.Cronus.Serialization.Newtonsofst.Jsson;
+using Microsoft.Extensions.ObjectPool;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson
 {
     public class JsonSerializer : ISerializer
     {
-        JsonSerializerSettings settings;
+        ObjectPool<StringBuilder> pool = ObjectPool.Create(new StringBuilderPooledObjectPolicy());
 
         Newtonsoft.Json.JsonSerializer serializer;
+        Newtonsoft.Json.JsonSerializer deserializer;
 
         public JsonSerializer(IEnumerable<Type> contracts)
         {
-            settings = new JsonSerializerSettings();
-            settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            settings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
-            settings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
-            settings.ContractResolver = new DataMemberContractResolver();
-            settings.TypeNameHandling = TypeNameHandling.Objects;
-            settings.TypeNameAssemblyFormatHandling = Newtonsoft.Json.TypeNameAssemblyFormatHandling.Simple;
-            settings.Formatting = Formatting.None;
-            settings.MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead;
-            settings.SerializationBinder = new TypeNameSerializationBinder(contracts);
-            settings.ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor;
-            serializer = Newtonsoft.Json.JsonSerializer.Create(settings);
+            var serializerSettings = new JsonSerializerSettings();
+            serializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+            serializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+            serializerSettings.ContractResolver = new DataMemberContractResolver();
+            serializerSettings.TypeNameHandling = TypeNameHandling.Objects;
+            serializerSettings.TypeNameAssemblyFormatHandling = Newtonsoft.Json.TypeNameAssemblyFormatHandling.Simple;
+            serializerSettings.Formatting = Formatting.None;
+            serializerSettings.SerializationBinder = new TypeNameSerializationBinder(contracts);
+            serializerSettings.ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor;
+            serializer = Newtonsoft.Json.JsonSerializer.Create(serializerSettings);
+
+            var deserializerSettings = new JsonSerializerSettings();
+            deserializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+            deserializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+            deserializerSettings.ContractResolver = new DataMemberContractResolver();
+            deserializerSettings.TypeNameHandling = TypeNameHandling.Objects;
+            deserializerSettings.TypeNameAssemblyFormatHandling = Newtonsoft.Json.TypeNameAssemblyFormatHandling.Simple;
+            deserializerSettings.Formatting = Formatting.None;
+            deserializerSettings.SerializationBinder = new TypeNameSerializationBinder(contracts);
+            deserializerSettings.ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor;
+
+            deserializer = Newtonsoft.Json.JsonSerializer.Create(deserializerSettings);
         }
 
-        public object Deserialize(System.IO.Stream str)
+        public byte[] SerializeToBytes<T>(T message)
         {
-            using StreamReader sr = new StreamReader(str);
-            using JsonReader reader = new JsonTextReader(sr);
+            StringBuilder stringBuilder = null;
 
-            return serializer.Deserialize(reader);
+            try
+            {
+                stringBuilder = pool.Get();
+                using (StringWriter sw = new StringWriter(stringBuilder, CultureInfo.InvariantCulture))
+                {
+                    using (JsonTextWriter tw = new JsonTextWriter(sw))
+                    {
+                        serializer.Serialize(tw, message);
+                    }
+                    return Encoding.UTF8.GetBytes(sw.ToString());
+                }
+            }
+            finally
+            {
+                if (stringBuilder is not null)
+                    pool.Return(stringBuilder);
+            }
         }
 
-        public object Deserialize(System.IO.Stream str, Type objectType)
+        public string SerializeToString<T>(T message)
         {
-            using StreamReader sr = new StreamReader(str);
-            using JsonReader reader = new JsonTextReader(sr);
+            StringBuilder stringBuilder = null;
 
-            return serializer.Deserialize(reader, objectType);
+            try
+            {
+                stringBuilder = pool.Get();
+                using (StringWriter sw = new StringWriter(stringBuilder, CultureInfo.InvariantCulture))
+                {
+                    using (JsonTextWriter tw = new JsonTextWriter(sw))
+                    {
+                        serializer.Serialize(tw, message);
+                    }
+                    return sw.ToString();
+                }
+            }
+            finally
+            {
+                if (stringBuilder is not null)
+                    pool.Return(stringBuilder);
+            }
         }
 
-        public void Serialize<T>(System.IO.Stream str, T message)
+        public T DeserializeFromBytes<T>(byte[] bytes)
         {
-            StreamWriter streamWriter = new StreamWriter(str);
-
-            serializer.Serialize(streamWriter, message);
-            streamWriter.Flush();
+            try
+            {
+                using (var stream = new MemoryStream(bytes))
+                using (var reader = new StreamReader(stream, Encoding.UTF8))
+                    return (T)deserializer.Deserialize(reader, typeof(T));
+            }
+            catch (Exception) { return default; }
         }
     }
 }

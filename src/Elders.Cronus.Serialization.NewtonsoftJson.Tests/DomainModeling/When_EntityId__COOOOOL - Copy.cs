@@ -16,24 +16,24 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
         {
             var id = AR_ID.New("elders", "abc123");
 
-            ser = new Urn(id.Value);
+            var ser = new Urn(id.Value);
             var contracts = new List<Type>();
             contracts.AddRange(typeof(AR_ID).Assembly.GetExportedTypes().Concat(typeof(Urn).Assembly.GetExportedTypes()));
             serializer = new JsonSerializer(contracts);
             serializer2 = new JsonSerializer(contracts.Except(new[] { typeof(AR_ID) }));
             serStream = new MemoryStream();
-            serializer.Serialize(serStream, ser);
+            data = serializer.SerializeToBytes(ser);
             serStream.Position = 0;
         };
-        Because of_deserialization = () => { deser = (Urn)serializer2.Deserialize(serStream); };
+        Because of_deserialization = () => deser = serializer2.DeserializeFromBytes<Urn>(data);
 
         It should_not_be_null = () => deser.ShouldNotBeNull();
 
-        static Urn ser;
         static Urn deser;
         static Stream serStream;
         static JsonSerializer serializer;
         static JsonSerializer serializer2;
+        static byte[] data;
     }
 
     [DataContract(Name = "0c499fdf-56a1-40e6-9c7c-e559f07ddfec")]

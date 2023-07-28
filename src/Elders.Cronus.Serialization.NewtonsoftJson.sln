@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elders.Cronus.Serialization
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elders.Cronus.Serialization.NewtonsoftJson", "Elders.Cronus.Serialization.NewtonsoftJson\Elders.Cronus.Serialization.NewtonsoftJson.csproj", "{F6E4D746-001F-41FE-A568-597F0F3A059C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cronus.Serialization.NewtonsoftJson.Tests.Stress", "Cronus.Serialization.NewtonsoftJson.Tests.Stress\Cronus.Serialization.NewtonsoftJson.Tests.Stress.csproj", "{8A9CCFE3-270E-4081-8392-9B1F6BA4C249}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{16F320A2-3827-4832-8C44-21A6A81A7728}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cronus.Serialization.NewtonsoftJson.Benchmarks", "Cronus.Serialization.NewtonsoftJson.Benchmarks\Cronus.Serialization.NewtonsoftJson.Benchmarks.csproj", "{C57FFBCD-AD81-4A97-A9F8-6B2D1D42B63B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +31,10 @@ Global
 		{F6E4D746-001F-41FE-A568-597F0F3A059C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6E4D746-001F-41FE-A568-597F0F3A059C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6E4D746-001F-41FE-A568-597F0F3A059C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A9CCFE3-270E-4081-8392-9B1F6BA4C249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A9CCFE3-270E-4081-8392-9B1F6BA4C249}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A9CCFE3-270E-4081-8392-9B1F6BA4C249}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A9CCFE3-270E-4081-8392-9B1F6BA4C249}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C57FFBCD-AD81-4A97-A9F8-6B2D1D42B63B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C57FFBCD-AD81-4A97-A9F8-6B2D1D42B63B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C57FFBCD-AD81-4A97-A9F8-6B2D1D42B63B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C57FFBCD-AD81-4A97-A9F8-6B2D1D42B63B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,7 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C7B52D62-E020-4810-9748-84C2A0E433C7} = {16F320A2-3827-4832-8C44-21A6A81A7728}
 		{18724F0F-FE76-4A5D-8A87-C1FC323B3179} = {16F320A2-3827-4832-8C44-21A6A81A7728}
-		{8A9CCFE3-270E-4081-8392-9B1F6BA4C249} = {16F320A2-3827-4832-8C44-21A6A81A7728}
+		{C57FFBCD-AD81-4A97-A9F8-6B2D1D42B63B} = {16F320A2-3827-4832-8C44-21A6A81A7728}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFFDBDCF-E077-4D58-B883-AED957D8F092}

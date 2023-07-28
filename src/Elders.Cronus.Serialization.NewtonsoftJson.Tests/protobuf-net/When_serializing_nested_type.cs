@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using Machine.Specifications;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
@@ -14,12 +13,9 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
             var contracts = new List<Type>();
             contracts.AddRange(typeof(NestedType).Assembly.GetExportedTypes());
             serializer = new JsonSerializer(contracts);
-            serStream = new MemoryStream();
-            serializer.Serialize(serStream, ser);
-            serStream.Position = 0;
+            data = serializer.SerializeToBytes(ser);
         };
-        Because of_deserialization = () => { deser = (NestedType)serializer.Deserialize(serStream); };
-
+        Because of_deserialization = () => deser = serializer.DeserializeFromBytes<NestedType>(data);
 
         It should_not_be_null = () => deser.ShouldNotBeNull();
         It should_have_the_same_int = () => deser.Int.ShouldEqual(ser.Int);
@@ -35,7 +31,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
 
         static NestedType ser;
         static NestedType deser;
-        static Stream serStream;
         static JsonSerializer serializer;
+        static byte[] data;
     }
 }

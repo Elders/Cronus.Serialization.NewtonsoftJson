@@ -31,8 +31,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cronus" Version="9.0.0-preview.40" />
-    <PackageReference Include="Cronus.DomainModeling" Version="9.0.0-preview.8" />
+    <PackageReference Include="Cronus" Version="9.0.0-preview.55" />
+    <PackageReference Include="Cronus.DomainModeling" Version="9.0.0-preview.10" />
+    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="7.0.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 

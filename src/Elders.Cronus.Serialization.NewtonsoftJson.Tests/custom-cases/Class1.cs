@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Runtime.Serialization;
 using Machine.Specifications;
 
@@ -83,25 +82,21 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
     {
         Establish context = () =>
         {
-            ser = new UserConversations(new UserId(Guid.NewGuid())) { UpdatedAt = DateTime.UtcNow };
+            var ser = new UserConversations(new UserId(Guid.NewGuid())) { UpdatedAt = DateTime.UtcNow };
             ser.Holder.Conversations = "asd";
             var contracts = new List<Type>();
             contracts.AddRange(typeof(NestedType).Assembly.GetExportedTypes());
             contracts.AddRange(typeof(Whem_UserConversations).Assembly.GetExportedTypes());
             serializer = new JsonSerializer(contracts);
-            serializer2 = new JsonSerializer(contracts);
-            serStream = new MemoryStream();
-            serializer.Serialize(serStream, ser);
-            serStream.Position = 0;
+
+            data = serializer.SerializeToBytes(ser);
         };
-        Because of_deserialization = () => { deser = (UserConversations)serializer.Deserialize(serStream); };
+        Because of_deserialization = () => { deser = serializer.DeserializeFromBytes<UserConversations>(data); };
 
         It should_not_be_null = () => deser.ShouldNotBeNull();
 
-        static UserConversations ser;
         static UserConversations deser;
-        static Stream serStream;
         static JsonSerializer serializer;
-        static JsonSerializer serializer2;
+        static byte[] data;
     }
 }

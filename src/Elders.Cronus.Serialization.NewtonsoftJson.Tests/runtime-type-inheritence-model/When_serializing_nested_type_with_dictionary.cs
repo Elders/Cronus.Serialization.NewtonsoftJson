@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Machine.Specifications;
 
@@ -9,7 +8,6 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
     [Subject(typeof(JsonSerializer))]
     public class When_serializing_nested_type_with_dictionary
     {
-
         Establish context = () =>
         {
             ser = new NestedTypeWithDctionaryInheritance() { Int = 5, Date = DateTime.UtcNow.AddDays(1), String = "a", Nested = new Dictionary<object, object>() };
@@ -18,13 +16,10 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
             ser.Nested.Add(key, value);
 
             serializer = new JsonSerializer((typeof(NestedType).Assembly.GetExportedTypes()));
-            serializer2 = new JsonSerializer((typeof(NestedType).Assembly.GetExportedTypes()));
-            serStream = new MemoryStream();
-            serializer.Serialize(serStream, ser);
-            serStream.Position = 0;
+            data = serializer.SerializeToBytes(ser);
         };
-        Because of_deserialization = () => { deser = (NestedTypeWithDctionaryInheritance)serializer2.Deserialize(serStream); };
 
+        Because of_deserialization = () => deser = serializer.DeserializeFromBytes<NestedTypeWithDctionaryInheritance>(data);
 
         It should_not_be_null = () => deser.ShouldNotBeNull();
         It should_have_the_same_int = () => deser.Int.ShouldEqual(ser.Int);
@@ -37,11 +32,9 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
         It nested_object_key_should_be_of_the_right_type = () => deser.Nested.First().Key.ShouldBeOfExactType(typeof(UndefinedDictionaryInheritance));
         It nested_object_value_should_be_of_the_right_type = () => deser.Nested.First().Value.ShouldBeOfExactType(typeof(UndefinedDictionaryInheritance));
 
-
         static NestedTypeWithDctionaryInheritance ser;
         static NestedTypeWithDctionaryInheritance deser;
-        static Stream serStream;
         static JsonSerializer serializer;
-        static JsonSerializer serializer2;
+        static byte[] data;
     }
 }
