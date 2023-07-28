@@ -1,3 +1,5 @@
+# [9.0.0-preview.3](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v9.0.0-preview.2...v9.0.0-preview.3) (2023-07-28)
+
 # [9.0.0-preview.2](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v9.0.0-preview.1...v9.0.0-preview.2) (2023-04-21)
 
 
