@@ -24,7 +24,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
                     if (contract.HasAttribute<DataContractAttribute>())
                     {
                         DataContractAttribute attribute = (DataContractAttribute)contract.GetCustomAttributes(typeof(DataContractAttribute), false).SingleOrDefault();
-                        if (attribute is null)
+                        if (attribute is null || string.IsNullOrEmpty(attribute.Name))
                         {
                             if (contractErrors is null)
                             {
