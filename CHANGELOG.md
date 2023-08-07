@@ -1,3 +1,10 @@
+# [9.0.0-preview.5](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v9.0.0-preview.4...v9.0.0-preview.5) (2023-08-07)
+
+
+### Bug Fixes
+
+* Updates packages ([b3bddcc](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/commit/b3bddcc76e5b216d8958a3ed25f9832ce5f285e9))
+
 # [9.0.0-preview.4](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v9.0.0-preview.3...v9.0.0-preview.4) (2023-07-31)
 
 
