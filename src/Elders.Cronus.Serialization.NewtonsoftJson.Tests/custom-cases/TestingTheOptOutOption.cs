@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 using Machine.Specifications;
@@ -12,10 +11,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
     [JsonObject(MemberSerialization.OptOut)]
     public class SomeClass
     {
-
         public string Value1 { get; set; }
-
-
         public string Value2 { get; set; }
     }
 
@@ -28,29 +24,14 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
             contracts.AddRange(typeof(SomeClass).Assembly.GetExportedTypes());
             serializer = new JsonSerializer(contracts);
 
-            bytes = (Encoding.UTF8).GetBytes(json);
-            serStream = new MemoryStream(bytes);
+            bytes = Encoding.UTF8.GetBytes(json);
 
         };
-        Because of_deserialization = () =>
-        {
-            //var asd = Newtonsoft.Json.JsonSerializer.Create();
-            //var jsonReader = new JsonTextReader(new StreamReader(serStream));
-            //Convert.
-            //var asdasdasd = asd.Deserialize(jsonReader);
-            //var sdfhsdfgh = (SomeClass)asdasdasd;
-
-            var gg = serializer.Deserialize(serStream, typeof(SomeClass));
-            deser = (SomeClass)gg;
-
-            int o = 0;
-            o++;
-        };
+        Because of_deserialization = () => deser = serializer.DeserializeFromBytes<SomeClass>(bytes);
 
         It should_not_be_null = () => deser.ShouldNotBeNull();
 
         static SomeClass deser;
-        static Stream serStream;
         static JsonSerializer serializer;
         static byte[] bytes;
         static string json = @"

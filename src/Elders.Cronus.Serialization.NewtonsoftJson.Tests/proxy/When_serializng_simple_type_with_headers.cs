@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Runtime.Serialization;
 using Machine.Specifications;
 
@@ -20,12 +19,14 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.proxy
             BaseProperty = "base value";
         }
     }
+
     [DataContract(Name = "a694dac8-0c1f-4cfe-a8a8-a5381c2ac44e")]
     public class ToProxy : BaseClass
     {
         [DataMember(Order = 2)]
         public string TestProperty { get; set; }
     }
+
     [Subject(typeof(JsonSerializer))]
     public class When_serializng_simple_type_with_headers
     {
@@ -37,12 +38,10 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.proxy
             contracts.AddRange(typeof(NestedType).Assembly.GetExportedTypes());
             contracts.AddRange(typeof(When_serializng_simple_type_with_headers).Assembly.GetExportedTypes());
             serializer = new JsonSerializer(contracts);
-            serStream = new MemoryStream();
-            serializer.Serialize(serStream, ser);
-            serStream.Position = 0;
+            data = serializer.SerializeToBytes(ser);
         };
-        Because of_deserialization = () => { deser = (ToProxy)serializer.Deserialize(serStream); };
 
+        Because of_deserialization = () => deser = serializer.DeserializeFromBytes<ToProxy>(data);
 
         It should_not_be_null = () => deser.ShouldNotBeNull();
 
@@ -51,7 +50,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.proxy
 
         static ToProxy ser;
         static ToProxy deser;
-        static Stream serStream;
         static JsonSerializer serializer;
+        static byte[] data;
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Machine.Specifications;
 using System.Runtime.Serialization;
-using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using System;
@@ -23,14 +22,9 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
         ""1"": ""Testing photo broadcasts to Promoters.. 1""
     }
 }";
+            data = Encoding.UTF8.GetBytes(json);
         };
-        Because of_deserialization = () =>
-        {
-            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
-            {
-                result = (TypeProblem_TopLevel)serializer.Deserialize(stream);
-            }
-        };
+        Because of_deserialization = () => result = serializer.DeserializeFromBytes<TypeProblem_TopLevel>(data);
 
         It should_not_be_null = () => result.ShouldNotBeNull();
 
@@ -39,6 +33,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
         static string json;
         static JsonSerializer serializer;
         static TypeProblem_TopLevel result;
+        static byte[] data;
     }
 
     [DataContract(Name = "07504e95-e40e-40b5-b7f6-209f6023c13c")]

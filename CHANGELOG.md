@@ -1,3 +1,35 @@
+# [9.0.0-preview.5](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v9.0.0-preview.4...v9.0.0-preview.5) (2023-08-07)
+
+
+### Bug Fixes
+
+* Updates packages ([b3bddcc](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/commit/b3bddcc76e5b216d8958a3ed25f9832ce5f285e9))
+
+# [9.0.0-preview.4](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v9.0.0-preview.3...v9.0.0-preview.4) (2023-07-31)
+
+
+### Bug Fixes
+
+* Adds a name check when mapping contracts ([5332bd6](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/commit/5332bd60cc5337e4569ee5961054324bc18eb401))
+
+# [9.0.0-preview.3](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v9.0.0-preview.2...v9.0.0-preview.3) (2023-07-28)
+
+# [9.0.0-preview.2](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v9.0.0-preview.1...v9.0.0-preview.2) (2023-04-21)
+
+
+### Bug Fixes
+
+* Adds a test for CronusMessage with raw payload ([a4c8816](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/commit/a4c88169970ea2c3530987c34224a91a63805e27))
+
+# [9.0.0-preview.1](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v8.1.1-preview.1...v9.0.0-preview.1) (2023-03-07)
+
+## [8.1.1-preview.1](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v8.1.0...v8.1.1-preview.1) (2022-12-12)
+
+
+### Bug Fixes
+
+* Updates packages ([4a82f83](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/commit/4a82f8316a2b90415b1caaffdf0601fa598b3033))
+
 # [8.1.0](https://github.com/Elders/Cronus.Serialization.NewtonsoftJson/compare/v8.0.2...v8.1.0) (2022-12-12)
 
 

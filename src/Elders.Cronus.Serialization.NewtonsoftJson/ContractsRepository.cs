@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson
 {
-    public class ContractsRepository
+    public sealed class ContractsRepository
     {
         private static readonly ILogger logger = CronusLogger.CreateLogger(typeof(ContractsRepository));
 
@@ -16,25 +16,29 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
 
         public ContractsRepository(IEnumerable<Type> contracts)
         {
-            if (contracts != null)
+            if (contracts is not null)
             {
-                StringBuilder contractErrors = new StringBuilder();
-                contractErrors.AppendLine("The following types are missing `DataContractAttribute.Name` and they will NOT be added to the serializer's contracts repository. Usually you will here see types which are not part of your solution but dependencies. However it is worth checking the list bellow when something is not working properly.");
+                StringBuilder contractErrors = null;
                 foreach (var contract in contracts)
                 {
                     if (contract.HasAttribute<DataContractAttribute>())
                     {
-                        var contractName = contract.GetAttrubuteValue<DataContractAttribute, string>(x => x.Name);
-                        if (string.IsNullOrEmpty(contractName))
+                        DataContractAttribute attribute = (DataContractAttribute)contract.GetCustomAttributes(typeof(DataContractAttribute), false).SingleOrDefault();
+                        if (attribute is null || string.IsNullOrEmpty(attribute.Name))
                         {
+                            if (contractErrors is null)
+                            {
+                                contractErrors = new StringBuilder();
+                                contractErrors.AppendLine("The following types are missing `DataContractAttribute.Name` and they will NOT be added to the serializer's contracts repository. Usually you will here see types which are not part of your solution but dependencies. However it is worth checking the list bellow when something is not working properly.");
+                            }
                             contractErrors.AppendLine(contract.FullName);
                             continue;
                         }
-                        Map(contract, contractName);
+                        Map(contract, attribute.Name);
                     }
                 }
 
-                if (contractErrors.Length > 1)
+                if (contractErrors is not null && contractErrors.Length > 1)
                     logger.Warn(() => contractErrors.ToString());
             }
         }
@@ -49,7 +53,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
             return nameToType.TryGetValue(name, out type);
         }
 
-        public IEnumerable<Type> Contracts { get { return typeToName.Keys.ToList().AsReadOnly(); } }
+        public IEnumerable<Type> Contracts { get { return typeToName.Keys; } }
 
         private void Map(Type type, string name)
         {

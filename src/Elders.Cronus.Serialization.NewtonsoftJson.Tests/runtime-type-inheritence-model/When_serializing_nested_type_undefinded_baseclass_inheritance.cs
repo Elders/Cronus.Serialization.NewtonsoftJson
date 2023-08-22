@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using Machine.Specifications;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
@@ -8,7 +7,6 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
     [Subject(typeof(JsonSerializer))]
     public class When_serializing_nested_type_undefinded_baseclass_inheritance
     {
-
         Establish context = () =>
         {
             ser = new NestedTypeWithBaseClassInheritance() { Int = 5, Date = DateTime.UtcNow.AddDays(1), String = "a", Nested = new UndefinedBaseclassInheritance() { Int = 4, Date = DateTime.UtcNow.AddDays(2), String = "b" } };
@@ -17,12 +15,9 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
             var contracts = new List<Type>();
             contracts.AddRange(typeof(NestedType).Assembly.GetExportedTypes());
             serializer = new JsonSerializer(contracts);
-            serializer2 = new JsonSerializer(contracts);
-            serStream = new MemoryStream();
-            serializer.Serialize(serStream, ser);
-            serStream.Position = 0;
+            data = serializer.SerializeToBytes(ser);
         };
-        Because of_deserialization = () => { deser = (NestedTypeWithBaseClassInheritance)serializer2.Deserialize(serStream); };
+        Because of_deserialization = () => deser = serializer.DeserializeFromBytes<NestedTypeWithBaseClassInheritance>(data);
 
 
         It should_not_be_null = () => deser.ShouldNotBeNull();
@@ -36,12 +31,9 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
         It nested_objects_should_contain_base_properties = () => ser.Nested.CustomBaseClassString.ShouldEqual(deser.Nested.CustomBaseClassString);
         It nested_objects_should_contain_bases_base_properties = () => ser.Nested.CustomBaseBaseClassString.ShouldEqual(deser.Nested.CustomBaseBaseClassString);
 
-
-
         static NestedTypeWithBaseClassInheritance ser;
         static NestedTypeWithBaseClassInheritance deser;
-        static Stream serStream;
         static JsonSerializer serializer;
-        static JsonSerializer serializer2;
+        static byte[] data;
     }
 }

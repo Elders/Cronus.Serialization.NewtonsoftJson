@@ -5,7 +5,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Elders.Cronus.Serialization.NewtonsoftJson
 {
-    public class TypeNameSerializationBinder : ISerializationBinder
+    public sealed class TypeNameSerializationBinder : ISerializationBinder
     {
         static Assembly NetAssembly = typeof(object).Assembly;
 

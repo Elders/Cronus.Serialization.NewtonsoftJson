@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Runtime.Serialization;
 using Machine.Specifications;
 
@@ -13,24 +12,19 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
         {
             ser = new C() { CString = "C", Aprop = new A() { AString = "A" } };
             var contracts = new List<Type>();
-            contracts.AddRange(typeof(NestedType).Assembly.GetExportedTypes());
-            contracts.AddRange(typeof(When_stackoverflow).Assembly.GetExportedTypes());
+            contracts.AddRange(typeof(C).Assembly.GetExportedTypes());
             serializer = new JsonSerializer(contracts);
-            serializer2 = new JsonSerializer(contracts);
-            serStream = new MemoryStream();
-            serializer.Serialize(serStream, ser);
-            serStream.Position = 0;
+            data = serializer.SerializeToBytes(ser);
         };
-        Because of_deserialization = () => { deser = (C)serializer.Deserialize(serStream); };
+
+        Because of_deserialization = () => deser = serializer.DeserializeFromBytes<C>(data);
 
         It should_not_be_null = () => deser.ShouldNotBeNull();
 
-
         static C ser;
         static C deser;
-        static Stream serStream;
         static JsonSerializer serializer;
-        static JsonSerializer serializer2;
+        static byte[] data;
     }
 
     [DataContract(Name = "79bb4bef-13d0-4a24-8e5a-f52e38b73eff")]
