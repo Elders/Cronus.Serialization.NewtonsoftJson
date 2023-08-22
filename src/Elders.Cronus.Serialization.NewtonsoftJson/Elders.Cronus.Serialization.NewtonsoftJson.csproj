@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <!--Nuget-->
@@ -27,12 +27,12 @@
     <RootNamespace>Elders.Cronus.Serialization.NewtonsoftJson</RootNamespace>
     <NeutralLanguage>en-US</NeutralLanguage>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <AssemblyVersion>9.0.0</AssemblyVersion>
+    <AssemblyVersion>10.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cronus" Version="9.0.1" />
-    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="7.0.10" />
+    <PackageReference Include="Cronus" Version="10.0.0-preview.1" />
+    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="8.0.0-preview.7.23375.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
