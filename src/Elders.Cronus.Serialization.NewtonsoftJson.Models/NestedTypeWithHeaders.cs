@@ -17,6 +17,9 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
 
         [DataMember(Order = 4)]
         public SimpleNestedTypeWithHeaders Nested { get; set; }
+
+        [DataMember(Order = 5)]
+        public DateTimeOffset Timestamp => DateTimeOffset.Now;
     }
 
     [DataContract(Name = "0d44bc1f-83c3-4747-a71e-fd38185b4d30")]
