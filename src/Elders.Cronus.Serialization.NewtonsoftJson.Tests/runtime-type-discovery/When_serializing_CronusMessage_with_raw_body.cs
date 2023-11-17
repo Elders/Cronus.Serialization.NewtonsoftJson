@@ -36,7 +36,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
         Because of_deserialization = () => deser = serializer.DeserializeFromBytes<CronusMessage>(cmBytes);
 
         It should_not_be_null = () => deser.ShouldNotBeNull();
-        It should_have_the_same_byte_array = () => ByteArrayHelper.Compare(deser.PayloadRaw, ser.PayloadRaw).ShouldBeTrue();
+        It should_have_the_same_byte_array = () => (deser.PayloadRaw.AsSpan() == ser.PayloadRaw).ShouldBeTrue();
         It should_have_the_same_byte_array_length = () => deser.PayloadRaw.Length.ShouldEqual(ser.PayloadRaw.Length);
 
         static CronusMessage ser;
