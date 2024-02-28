@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using Microsoft.Extensions.Logging;
@@ -34,13 +36,48 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
                             contractErrors.AppendLine(contract.FullName);
                             continue;
                         }
-                        Map(contract, attribute.Name);
+
+                        if (contract.IsGenericType)
+                        {
+                            var genericDefType = contract.GetGenericArguments().FirstOrDefault();
+                            DataContractAttribute genattribute = (DataContractAttribute)genericDefType.GetCustomAttributes(typeof(DataContractAttribute), false).SingleOrDefault();
+
+                            if (genattribute is not null && attribute.Name != genattribute.Name)
+                            {
+
+                                string contractString = $"{attribute.Name}_{genattribute.Name}";
+                                Map(contract, contractString);
+                            }
+                        }
+                        else
+                        {
+                            Map(contract, attribute.Name);
+                        }
                     }
                 }
 
                 if (contractErrors is not null && contractErrors.Length > 1)
                     logger.Warn(() => contractErrors.ToString());
             }
+        }
+
+        internal string GetGenericTypeContract(Type type)
+        {
+            string contractId = string.Empty;
+
+            DataContractAttribute attribute = (DataContractAttribute)type.GetCustomAttributes(typeof(DataContractAttribute), false).SingleOrDefault();
+            if (attribute is not null && string.IsNullOrEmpty(attribute.Name) == false && type.IsGenericType)
+            {
+                var genericDefType = type.GetGenericArguments().FirstOrDefault();
+                DataContractAttribute genattribute = (DataContractAttribute)genericDefType.GetCustomAttributes(typeof(DataContractAttribute), false).SingleOrDefault();
+
+                if (genattribute is not null && attribute.Name != genattribute.Name)
+                {
+                    contractId = $"{attribute.Name}_{genattribute.Name}";
+                }
+            }
+
+            return contractId;
         }
 
         public bool TryGet(Type type, out string name)
@@ -55,7 +92,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
 
         public IEnumerable<Type> Contracts { get { return typeToName.Keys; } }
 
-        private void Map(Type type, string name)
+        internal void Map(Type type, string name)
         {
             if (nameToType.ContainsKey(name) && nameToType[name] != type)
                 throw new InvalidOperationException(string.Format("Duplicate contract registration {0}", name));

@@ -7,7 +7,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
 {
     public sealed class TypeNameSerializationBinder : ISerializationBinder
     {
-        static Assembly NetAssembly = typeof(object).Assembly;
+        static Assembly DotNetAssembly = typeof(object).Assembly;
 
         private readonly ContractsRepository contractRepository;
 
@@ -26,13 +26,23 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
             }
             else
             {
-                if (serializedType.Assembly == NetAssembly)
+                if (serializedType.Assembly == DotNetAssembly)
                 {
                     assemblyName = serializedType.Assembly.FullName;
                     typeName = serializedType.FullName;
                 }
+                else if (serializedType.IsGenericType)
+                {
+                    var contractId = contractRepository.GetGenericTypeContract(serializedType);
+                    contractRepository.Map(serializedType, contractId);
+
+                    assemblyName = null;
+                    typeName = contractId;
+                }
                 else
+                {
                     throw new InvalidOperationException(String.Format("Unkown, unregistered type {0}", serializedType));
+                }
             }
         }
 
