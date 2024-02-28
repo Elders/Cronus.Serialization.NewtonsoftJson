@@ -54,7 +54,19 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
                 {
                     Type type;
                     if (contractRepository.TryGet(typeName, out type))
+                    {
                         return type;
+                    }
+                    else
+                    {
+                        var genericType = contractRepository.GetGenericType(typeName);
+                        if (genericType is not null)
+                        {
+                            contractRepository.Map(genericType, typeName);
+
+                            return genericType;
+                        }
+                    }
                 }
                 return Type.GetType(string.Format("{0}, {1}", typeName, assemblyName), true);
             }
