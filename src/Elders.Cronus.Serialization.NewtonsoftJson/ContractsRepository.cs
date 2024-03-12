@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using Microsoft.Extensions.Logging;
@@ -12,6 +10,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
     public sealed class ContractsRepository
     {
         private static readonly ILogger logger = CronusLogger.CreateLogger(typeof(ContractsRepository));
+        private static Type DataContractAttributeType = typeof(DataContractAttribute);
 
         readonly Dictionary<Type, string> typeToName = new Dictionary<Type, string>();
         readonly Dictionary<string, Type> nameToType = new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
@@ -24,10 +23,10 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
                 StringBuilder contractErrors = null;
                 foreach (var contract in contracts)
                 {
-                    if (contract.HasAttribute<DataContractAttribute>())
+                    if (contract.IsDefined(DataContractAttributeType, false))
                     {
-                        DataContractAttribute attribute = (DataContractAttribute)contract.GetCustomAttributes(typeof(DataContractAttribute), false).SingleOrDefault();
-                        if (attribute is null || string.IsNullOrEmpty(attribute.Name))
+                        DataContractAttribute attribute = (DataContractAttribute)contract.GetCustomAttributes(DataContractAttributeType, false).Single();
+                        if (string.IsNullOrEmpty(attribute.Name))
                         {
                             if (contractErrors is null)
                             {
@@ -132,6 +131,9 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
 
         internal void Map(Type type, string name)
         {
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentNullException("name", $"Contract name for {type.FullName} cannot be empty.");
+
             if (nameToType.ContainsKey(name) && nameToType[name] != type)
                 throw new InvalidOperationException(string.Format("Duplicate contract registration {0}", name));
 
