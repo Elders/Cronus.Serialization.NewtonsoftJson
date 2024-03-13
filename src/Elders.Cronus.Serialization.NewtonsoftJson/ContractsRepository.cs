@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using Microsoft.Extensions.Logging;
@@ -78,6 +79,10 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
                     {
                         contractConstruction.Append($"`{genattribute.Name}");
                     }
+                    else if (IsPrimitive(genericArgumentType))
+                    {
+                        contractConstruction.Append($"`{genericArgumentType.Name}");
+                    }
                     else
                     {
                         contractConstruction = contractConstruction.Clear();
@@ -88,6 +93,13 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
             }
 
             return contractId;
+
+            static bool IsPrimitive(Type genericArgumentType)
+            {
+                //  be carefull because there are some types that we can think that are primitives,
+                //  but they aren´t, for example Decimal and String and maybe more that we want to treat as primitive
+                return genericArgumentType.IsPrimitive || genericArgumentType == typeof(Decimal) || genericArgumentType == typeof(String);
+            }
         }
 
         internal Type GetGenericType(string contract)

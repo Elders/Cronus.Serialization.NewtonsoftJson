@@ -37,6 +37,28 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests
     }
 
     [Subject(typeof(JsonSerializer))]
+    public class When_serialize_generic_objects_with_string_param
+    {
+        Establish context = () =>
+        {
+            ser = new GGA("123", new GenericObject<string>("123", "source", "test"));
+            var contracts = new List<Type>();
+            contracts.AddRange(typeof(GGA).Assembly.GetExportedTypes());
+            serializer = new JsonSerializer(contracts);
+            data = serializer.SerializeToBytes(ser);
+        };
+
+        Because of_deserialization = () => deser = serializer.DeserializeFromBytes<GGA>(data);
+
+        It should_not_be_null = () => deser.ShouldNotBeNull();
+
+        static GGA ser;
+        static GGA deser;
+        static JsonSerializer serializer;
+        static byte[] data;
+    }
+
+    [Subject(typeof(JsonSerializer))]
     public class When_serialize_generic_objects_with_object_param
     {
         Establish context = () =>
