@@ -1,8 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Running;
 using Elders.Cronus.Serialization.NewtonsoftJson;
 
-BenchmarkRunner.Run<DeserializeBenchmark>();
+//BenchmarkRunner.Run<DeserializeBenchmark>();
 
 //var d = new DeserializeBenchmark();
 //d.DeserializeCronus();
