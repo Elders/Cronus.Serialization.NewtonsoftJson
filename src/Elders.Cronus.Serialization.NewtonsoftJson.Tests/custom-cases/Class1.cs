@@ -31,14 +31,14 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
     public class UserId : AggregateRootId
     {
         protected UserId() { }
-        public UserId(Guid id) : base(id.ToString(), "User", "elders") { }
+        public UserId(Guid id) : base("elders", "User", id.ToString()) { }
     }
 
     [DataContract(Name = "20d462ee-3340-4a93-9e9f-b74b2a373881")]
     public class ConversationId : AggregateRootId
     {
         protected ConversationId() { }
-        public ConversationId(Guid id) : base(id.ToString(), "Conversation", "elders") { }
+        public ConversationId(Guid id) : base("elders", "Conversation", id.ToString()) { }
     }
 
     [DataContract(Name = "4b1ab5ff-e7b5-48f4-bceb-a85671fd281f")]

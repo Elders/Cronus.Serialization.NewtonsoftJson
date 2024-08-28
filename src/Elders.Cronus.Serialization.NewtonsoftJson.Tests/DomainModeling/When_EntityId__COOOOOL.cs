@@ -31,14 +31,16 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
     [DataContract(Name = "33908fe3-89d8-458f-975f-4a1e273c2134")]
     public class WorkId : EntityId<JobId>
     {
+        protected override ReadOnlySpan<char> EntityName => "Work";
+
         protected WorkId() { }
-        public WorkId(Guid id, JobId jobId) : base(id.ToString(), jobId, "Work") { }
+        public WorkId(Guid id, JobId jobId) : base(id.ToString(), jobId) { }
     }
 
     [DataContract(Name = "470532ba-fe38-4dd4-b825-26c81d75a64e")]
     public class JobId : AggregateRootId
     {
         protected JobId() { }
-        public JobId(Guid id) : base(id.ToString(), "Job", "elders") { }
+        public JobId(Guid id) : base("elders", "Job", id.ToString()) { }
     }
 }

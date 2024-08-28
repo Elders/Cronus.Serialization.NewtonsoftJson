@@ -3,5 +3,7 @@ using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
 using Perfolizer.Horology;
 
-var cfg = DefaultConfig.Instance.WithSummaryStyle(SummaryStyle.Default.WithTimeUnit(TimeUnit.Millisecond));
+var cfg = DefaultConfig.Instance
+    .WithSummaryStyle(SummaryStyle.Default.WithTimeUnit(TimeUnit.Millisecond))
+    .StopOnFirstError();
 BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args, cfg);

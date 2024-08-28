@@ -21,6 +21,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
             var binder = new TypeNameSerializationBinder(contracts);
 
             var serializerSettings = new JsonSerializerSettings();
+            serializerSettings.Converters.Add(new ReadOnlyMemoryJsonConverter<byte>());
             serializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
             serializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
             serializerSettings.ContractResolver = new DataMemberContractResolver();
@@ -32,6 +33,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
             serializer = Newtonsoft.Json.JsonSerializer.Create(serializerSettings);
 
             var deserializerSettings = new JsonSerializerSettings();
+            deserializerSettings.Converters.Add(new ReadOnlyMemoryJsonConverter<byte>());
             deserializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
             deserializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
             deserializerSettings.ContractResolver = new DataMemberContractResolver();

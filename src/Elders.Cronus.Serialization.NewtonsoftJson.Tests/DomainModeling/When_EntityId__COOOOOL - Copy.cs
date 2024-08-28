@@ -40,11 +40,8 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
     public class AR_ID : AggregateRootId<AR_ID>
     {
         AR_ID() { }
-        AR_ID(string id, string tenant) : base(id, "ar_id", tenant) { }
+        AR_ID(ReadOnlySpan<char> tenant, ReadOnlySpan<char> id) : base(tenant, id) { }
 
-        protected override AR_ID Construct(string id, string tenant)
-        {
-            return new AR_ID(id, tenant);
-        }
+        public override ReadOnlySpan<char> AggregateRootName => "ar_id";
     }
 }
