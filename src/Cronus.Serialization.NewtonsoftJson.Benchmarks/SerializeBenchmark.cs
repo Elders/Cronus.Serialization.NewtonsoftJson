@@ -1,29 +1,24 @@
 ﻿using BenchmarkDotNet.Attributes;
 using Elders.Cronus.Serialization.NewtonsoftJson;
 
-//BenchmarkRunner.Run<SerializeBenchmark>();
-
-//var d = new SerializeBenchmark();
-//d.SerializeCronus();
-//d.SerializeStringBuilder();
-//d.SerializeStringBuilderPool();
-//d.ggg();
-
 [MemoryDiagnoser]
 public class SerializeBenchmark
 {
-    private readonly JsonSerializer serializer;
-    private readonly JsonSerializer deserializer;
+    private JsonSerializer serializer;
+    private JsonSerializer deserializer;
+    private ListData list;
 
-    public SerializeBenchmark()
+    [GlobalSetup]
+    public void Setup()
     {
         var contracts = new List<Type>();
         contracts.AddRange(typeof(CollectionSerializationBenchmark).Assembly.GetExportedTypes());
         serializer = new JsonSerializer(contracts);
         deserializer = new JsonSerializer(contracts);
+        list = new ListData(Generate(NumberOfItems).ToList());
     }
 
-    private static IEnumerable<Data> Generate(int numberOfItems)
+    private IEnumerable<Data> Generate(int numberOfItems)
     {
         for (int i = 0; i < numberOfItems; i++)
         {
@@ -31,26 +26,24 @@ public class SerializeBenchmark
         }
     }
 
-    [Params(1)]
-    public static int NumberOfItems { get; set; }
-    static ListData list = new ListData(Generate(NumberOfItems).ToList());
+    [Params(1, 1000, 100_000)]
+    public int NumberOfItems { get; set; }
 
     [Benchmark(Baseline = true)]
-    public void SerializeCronus()
+    public byte[] SerializeToBytes()
     {
-        var bytes = serializer.SerializeToBytes(list);
+        return serializer.SerializeToBytes(list);
     }
 
-    [Benchmark()]
-    public void SerializeCronusNew()
+    [Benchmark]
+    public ReadOnlyMemory<byte> SerializeToReadOnlyMemory()
     {
-        var bytes = serializer.SerializeToBytes(list);
+        return serializer.SerializeToReadOnlyMemory(list);
     }
 
-    public void ggg()
+    [Benchmark]
+    public string SerializeToString()
     {
-        var bytes = serializer.SerializeToString(list);
+        return serializer.SerializeToString(list);
     }
 }
-
-
