@@ -37,12 +37,6 @@ public class DeserializeBenchmark
     {
         return serializer.DeserializeFromBytes<IListData>(serializedData);
     }
-
-    [Benchmark]
-    public IListData DeserializeFromMemory()
-    {
-        return serializer.DeserializeFromBytes<IListData>(serializedDataAsMemory);
-    }
 }
 
 

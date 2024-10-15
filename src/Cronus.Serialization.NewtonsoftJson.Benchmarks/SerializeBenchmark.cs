@@ -38,7 +38,7 @@ public class SerializeBenchmark
     [Benchmark]
     public ReadOnlyMemory<byte> SerializeToReadOnlyMemory()
     {
-        return serializer.SerializeToReadOnlyMemory(list);
+        return serializer.SerializeToBytes(list);
     }
 
     [Benchmark]
