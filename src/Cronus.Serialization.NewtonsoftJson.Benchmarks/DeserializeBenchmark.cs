@@ -1,29 +1,30 @@
 ﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Running;
 using Elders.Cronus.Serialization.NewtonsoftJson;
-
-BenchmarkRunner.Run<DeserializeBenchmark>();
-
-//var d = new DeserializeBenchmark();
-//d.DeserializeCronus();
-//d.DeserializeCronusNew();
-
 
 [MemoryDiagnoser]
 public class DeserializeBenchmark
 {
-    private readonly JsonSerializer serializer;
+    private JsonSerializer serializer;
+    private ListData list;
+    private byte[] serializedData;
+    private ReadOnlyMemory<byte> serializedDataAsMemory;
 
-    public DeserializeBenchmark()
+    [GlobalSetup]
+    public void Setup()
     {
         var contracts = new List<Type>();
         contracts.AddRange(typeof(DeserializeBenchmark).Assembly.GetExportedTypes());
         serializer = new JsonSerializer(contracts);
 
         serializedData = serializer.SerializeToBytes(list);
+        serializedDataAsMemory = new ReadOnlyMemory<byte>(serializedData);
+        list = new ListData(Generate(NumberOfItems).ToList());
     }
 
-    private static IEnumerable<Data> Generate(int numberOfItems)
+    [Params(1, 1000, 100_000)]
+    public int NumberOfItems { get; set; }
+
+    private IEnumerable<Data> Generate(int numberOfItems)
     {
         for (int i = 0; i < numberOfItems; i++)
         {
@@ -31,21 +32,10 @@ public class DeserializeBenchmark
         }
     }
 
-    [Params(1)]
-    public static int NumberOfItems { get; set; } = 1;
-    static ListData list = new ListData(Generate(NumberOfItems).ToList());
-
-    static byte[] serializedData;
-
     [Benchmark(Baseline = true)]
-    public void DeserializeCronusNew()
+    public IListData DeserializeFromBytes()
     {
-        _ = serializer.DeserializeFromBytes<IListData>(serializedData);
-    }
-
-    public void ggg()
-    {
-        var bytes = serializer.SerializeToString(list);
+        return serializer.DeserializeFromBytes<IListData>(serializedData);
     }
 }
 

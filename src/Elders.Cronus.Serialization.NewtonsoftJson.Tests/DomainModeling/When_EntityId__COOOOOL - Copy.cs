@@ -14,7 +14,7 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
         static Guid JobId = new Guid("debd3009-120b-45d9-84ba-e2216f597de0");
         Establish context = () =>
         {
-            var id = AR_ID.New("elders", "abc123");
+            var id = new AR_ID("elders", "abc123");
 
             var ser = new Urn(id.Value);
             var contracts = new List<Type>();
@@ -37,14 +37,12 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson.Tests.custom_cases
     }
 
     [DataContract(Name = "0c499fdf-56a1-40e6-9c7c-e559f07ddfec")]
-    public class AR_ID : AggregateRootId<AR_ID>
+    public class AR_ID : AggregateRootId
     {
-        AR_ID() { }
-        AR_ID(string id, string tenant) : base(id, "ar_id", tenant) { }
+        private const string AggregateName = "ar_id";
 
-        protected override AR_ID Construct(string id, string tenant)
-        {
-            return new AR_ID(id, tenant);
-        }
+        AR_ID() { }
+
+        public AR_ID(string tenant, string id) : base(tenant, AggregateName, id) { }
     }
 }

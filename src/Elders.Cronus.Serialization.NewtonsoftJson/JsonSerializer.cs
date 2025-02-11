@@ -18,25 +18,29 @@ namespace Elders.Cronus.Serialization.NewtonsoftJson
 
         public JsonSerializer(IEnumerable<Type> contracts)
         {
+            var binder = new TypeNameSerializationBinder(contracts);
+
             var serializerSettings = new JsonSerializerSettings();
+            serializerSettings.Converters.Add(new ReadOnlyMemoryJsonConverter<byte>());
             serializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
             serializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
             serializerSettings.ContractResolver = new DataMemberContractResolver();
             serializerSettings.TypeNameHandling = TypeNameHandling.Objects;
             serializerSettings.TypeNameAssemblyFormatHandling = Newtonsoft.Json.TypeNameAssemblyFormatHandling.Simple;
             serializerSettings.Formatting = Formatting.None;
-            serializerSettings.SerializationBinder = new TypeNameSerializationBinder(contracts);
+            serializerSettings.SerializationBinder = binder;
             serializerSettings.ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor;
             serializer = Newtonsoft.Json.JsonSerializer.Create(serializerSettings);
 
             var deserializerSettings = new JsonSerializerSettings();
+            deserializerSettings.Converters.Add(new ReadOnlyMemoryJsonConverter<byte>());
             deserializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
             deserializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
             deserializerSettings.ContractResolver = new DataMemberContractResolver();
             deserializerSettings.TypeNameHandling = TypeNameHandling.Objects;
             deserializerSettings.TypeNameAssemblyFormatHandling = Newtonsoft.Json.TypeNameAssemblyFormatHandling.Simple;
             deserializerSettings.Formatting = Formatting.None;
-            deserializerSettings.SerializationBinder = new TypeNameSerializationBinder(contracts);
+            deserializerSettings.SerializationBinder = binder;
             deserializerSettings.ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor;
 
             deserializer = Newtonsoft.Json.JsonSerializer.Create(deserializerSettings);

@@ -1,12 +1,6 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿using System.Runtime.Serialization;
+using BenchmarkDotNet.Attributes;
 using Elders.Cronus.Serialization.NewtonsoftJson;
-using System.Runtime.Serialization;
-
-//BenchmarkRunner.Run<CollectionSerializationBenchmark>();
-//var test = new CollectionSerializationBenchmark();
-//test.SerializeRecordData();
-
-//Console.WriteLine("test");
 
 [MemoryDiagnoser]
 public class CollectionSerializationBenchmark
@@ -45,52 +39,52 @@ public class CollectionSerializationBenchmark
     static RecordData recordData = new RecordData() { TheData = Generate(NumberOfItems).ToList() };
 
     [Benchmark()]
-    public void SerializeEnumerable()
+    public EnumerableData SerializeEnumerable()
     {
         var bytes = serializer.SerializeToBytes(enumerable);
-        _ = deserializer.DeserializeFromBytes<EnumerableData>(bytes);
+        return deserializer.DeserializeFromBytes<EnumerableData>(bytes);
     }
 
     [Benchmark(Baseline = true)]
-    public void SerializeList()
+    public ListData SerializeList()
     {
         var bytes = serializer.SerializeToBytes(list);
-        _ = deserializer.DeserializeFromBytes<ListData>(bytes);
+        return deserializer.DeserializeFromBytes<ListData>(bytes);
     }
 
     [Benchmark()]
-    public void SerializeArray()
+    public ArrayData SerializeArray()
     {
         var bytes = serializer.SerializeToBytes(array);
-        _ = deserializer.DeserializeFromBytes<ArrayData>(bytes);
+        return deserializer.DeserializeFromBytes<ArrayData>(bytes);
     }
 
     [Benchmark()]
-    public void SerializeSealedEnumerable()
+    public SealedEnumerableData SerializeSealedEnumerable()
     {
         var bytes = serializer.SerializeToBytes(sealedenumerable);
-        _ = deserializer.DeserializeFromBytes<SealedEnumerableData>(bytes);
+        return deserializer.DeserializeFromBytes<SealedEnumerableData>(bytes);
     }
 
     [Benchmark()]
-    public void SerializeSealedList()
+    public SealedListData SerializeSealedList()
     {
         var bytes = serializer.SerializeToBytes(sealedlist);
-        _ = deserializer.DeserializeFromBytes<SealedListData>(bytes);
+        return deserializer.DeserializeFromBytes<SealedListData>(bytes);
     }
 
     [Benchmark()]
-    public void SerializeSealedArray()
+    public SealedArrayData SerializeSealedArray()
     {
         var bytes = serializer.SerializeToBytes(sealedarray);
-        _ = deserializer.DeserializeFromBytes<SealedArrayData>(bytes);
+        return deserializer.DeserializeFromBytes<SealedArrayData>(bytes);
     }
 
     [Benchmark()]
-    public void SerializeRecordData()
+    public RecordData SerializeRecordData()
     {
         var bytes = serializer.SerializeToBytes(recordData);
-        _ = deserializer.DeserializeFromBytes<RecordData>(bytes);
+        return deserializer.DeserializeFromBytes<RecordData>(bytes);
     }
 }
 
